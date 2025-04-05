@@ -11,14 +11,6 @@ body {
   font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
 }
 
-::-webkit-scrollbar {
-  background-image: linear-gradient(#f1f5f9, #f1f5f9);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: gray
-}
-
 .floating__header_lightMode {
   @apply bg-slate-200 m-2 bg-opacity-70 backdrop-blur-md right-0 left-0 rounded-lg
 }
