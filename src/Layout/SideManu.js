@@ -7,16 +7,16 @@ export function SideManu() {
       <div className="flex flex-col gap-2">
         {manuList.map((icon, i) => {
           return (
-            <p key={i} className="truncate my-2 border bg-gray-500/10 rounded-lg py-2 flex flex-col justify-center items-center">
+            <button key={i} className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 rounded-lg py-2 flex flex-col justify-center items-center">
               {icon.icon}
-            </p>
+            </button>
           )
         })}
       </div>
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-      <div className="">
-        <p className="truncate my-2 border bg-gray-500/10 rounded-lg py-2 flex flex-col justify-center items-center">
+      <div role="button" className="">
+        <p className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 rounded-lg py-2 flex flex-col justify-center items-center">
           <BiLayout className="scale-150" />
         </p>
       </div>

@@ -12,9 +12,9 @@ body {
 }
 
 .floating__header_lightMode {
-  @apply bg-slate-200 m-2 bg-opacity-70 backdrop-blur-md right-0 left-0 rounded-lg
+  @apply bg-slate-200 m-2 bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
 }
 
 .floating__header_darkMode {
-  @apply dark:bg-gray-900 m-2 dark:bg-opacity-70 backdrop-blur-md right-0 left-0 rounded-lg
+  @apply dark:bg-gray-900 m-2 dark:bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
 }
