@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useWindowScroll } from "react-use";
 import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
-import { ProfileDropdown } from "./ProfileDropdown";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 
 export function Header({ setShowManu }) {
@@ -32,7 +31,6 @@ export function Header({ setShowManu }) {
       element.classList.add("floating__header_lightMode")
       setProfile(false);
       setShowSearch(false);
-      setShowManu(false)
 
     } else if (currentScrollY === 0 && !darkMode) {
       element.classList.remove("floating__header_lightMode")
@@ -40,11 +38,11 @@ export function Header({ setShowManu }) {
       element.classList.add("floating__header_darkMode")
       setProfile(false);
       setShowSearch(false);
-      setShowManu(false)
-      
+
     } else if (currentScrollY === 0 && darkMode) {
       element.classList.remove("floating__header_darkMode")
     };
+    // eslint-disable-next-line 
   }, [currentScrollY, darkMode]);
 
   return (
@@ -92,8 +90,8 @@ export function Header({ setShowManu }) {
         </section>
       </nav>
       {
-        showProfile 
-        && <ProfileDropdownLoggedOut /> 
+        showProfile
+        && <ProfileDropdownLoggedOut />
         // && <ProfileDropdown />
       }
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />

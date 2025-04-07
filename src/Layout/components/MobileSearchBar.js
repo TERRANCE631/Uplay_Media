@@ -1,7 +1,12 @@
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
+import { GlobalContext } from '../../Hooks/Context/useContext';
+import { videos } from '../../Pages/Home/Components/VideoList';
 
-export function MobileSearchBar({currentScrollY, showSearch}) {
+export function MobileSearchBar({ currentScrollY, showSearch }) {
+    const { setValue, value } = GlobalContext();
+    const filter = videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) })
+
     return (
         <section className={`${currentScrollY > 0 ? "w-screen mt-5 transition-all duration-500"
             : showSearch ? "w-screen h-screen bg-black bg-opacity-20 transition-all duration-500"
@@ -10,11 +15,14 @@ export function MobileSearchBar({currentScrollY, showSearch}) {
                 <nav className="flex items-center flex-grow w-full justify-center">
                     <section className="mt-[4.7rem] flex w-full flex-grow px-4 items-center md:hidden">
                         <input
+                            onChange={(e) => setValue(e.target.value)}
                             type="text"
+                            value={value}
                             className="bg-gray-200 flex border flex-grow w-full outline-none border-gray-500 py-2 pl-4 rounded-l-full"
                             placeholder="Search video here"
                         />
                         <button
+                            onClick={() => setValue("")}
                             className="absolute right-[25.5%] text-white bg-gray-500/30 hover:bg-gray-500/10 
                             rounded-full scale-[165%] font-thin px-2"
                         >
@@ -25,6 +33,18 @@ export function MobileSearchBar({currentScrollY, showSearch}) {
                         </span>
                     </section>
                 </nav>}
+            {value !== "" && filter.length &&
+                <result className="flex md:hidden my-12 justify-center items-center inset-x-0 top-[4.5rem] ite min-h-20 absolute">
+                    <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
+                        {filter.map((name, i) => {
+                            return (
+                                <p key={i} className="border-gray-400 shadow-lg truncate rounded-lg border p-2 my-0.5">
+                                    {name.title}
+                                </p>
+                            )
+                        })}
+                    </section>
+                </result>}
         </section>
 
     )

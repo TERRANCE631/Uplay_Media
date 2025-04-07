@@ -2,12 +2,13 @@ import React from 'react'
 import { BiLayout } from 'react-icons/bi'
 import { slideList } from './components/SlideList'
 import { Link } from 'react-router-dom'
+import { subsList } from './components/SubsList'
 
 export function SlideIn({ setShowManu }) {
     return (
-        <section className="fixed w-full flex flex-col z-50 bg-black bg-opacity-50 truncate px-4 pt-4 left-0 text-black 
+        <section className="fixed w-full flex flex-col z-50 bg-black bg-opacity-50 px-4 pt-4 left-0 text-black 
          dark:text-white h-screen">
-            <section className="fixed bg-slate-200 dark:bg-gray-800 shadow-black shadow-xl 2xl:w-[6.5%] xl:w-[11.9%] lg:w-[16%] md:w-[22%] md:flex 
+            <section className="fixed bg-slate-200 dark:bg-gray-800 shadow-black shadow-xl 2xl:w-[16.5%] xl:w-[18.9%] lg:w-[22%] md:w-[30%] w-[50%] md:flex 
             flex-col z-50 truncate px-4 pt-4 left-0 top-0 h-screen">
                 <section className="flex items-center">
                     <div
@@ -23,34 +24,54 @@ export function SlideIn({ setShowManu }) {
                         </span>
                     </Link>
                 </section>
-                <div className="pt-6">
-                    <div className="flex flex-col gap-2">
-                        {slideList.map((icon, i) => {
-                            return (
-                                <button>
-                                    <p key={i} className="truncate my-2 hover:bg-gray-500/10 bg-gray-500/20 rounded-lg py-2 flex
+                <section className="h-100 overflow-y-auto subs__scrollbar pr-2">
+                    <div className="pt-6">
+                        <div className="flex flex-col gap-2">
+                            {slideList.map((icon, i) => {
+                                return (
+                                    <button>
+                                        <p key={i} className="truncate my-2 hover:bg-gray-500/10 bg-gray-500/20 rounded-lg py-2 flex
                                      flex-col justify-center items-center">
-                                        {icon.icon}
-                                        <p className="mt-0.5 md:text-md text-xs">
-                                            {icon.title}
+                                            {icon.icon}
+                                            <p className="mt-0.5 md:text-md text-xs">
+                                                {icon.title}
+                                            </p>
                                         </p>
-                                    </p>
-                                </button>
-                            )
-                        })}
+                                    </button>
+                                )
+                            })}
+                        </div>
+                        <div className="border-b my-4 border-gray-500 dark:border-white" />
+
+                        <div role="button" className="md:text-md">
+                            <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 rounded-lg py-2 flex flex-col 
+                        justify-center items-center">
+                                <BiLayout className="scale-150" />
+                                <p className="mt-0.5  text-xs">
+                                    My videos
+                                </p>
+                            </p>
+                        </div>
                     </div>
                     <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-                    <div role="button" className="md:text-md text-xs">
-                        <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 rounded-lg py-2 flex flex-col 
-                        justify-center items-center">
-                            <BiLayout className="scale-150" />
-                            <p className="mt-0.5">
-                                My videos
-                            </p>
-                        </p>
+                    <p className="text-sm">Subscribtions</p>
+                    <div role="button" className="">
+                        {subsList.map((sub, i) => {
+                            return (
+                                <section key={i} className="bg-gray-500/20 truncate hover:bg-gray-500/10 flex items-center 
+                                rounded-lg my-2 px-2 gap-1">
+                                    <button className="md:h-8 md:w-8 bg-white w-8 h-8 rounded-full border 
+                                hover:opacity-70 flex flex-col my-2">
+                                        <img src="/Assets/profile.png" alt="" className="object-cover object-center h-full w-full rounded-full" />
+                                    </button>
+                                    <p className="truncate">Terrance</p>
+                                </section>
+                            )
+                        })}
                     </div>
-                </div>
+                    <footer>footer</footer>
+                </section>
             </section>
         </section>
     )

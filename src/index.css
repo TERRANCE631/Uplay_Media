@@ -11,10 +11,49 @@ body {
   font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
 }
 
-.floating__header_lightMode {
-  @apply bg-slate-200 m-2 bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
+@layer scrollBar {
+  .subs__scrollbar::-webkit-scrollbar {
+    background-image: linear-gradient(transparent, transparent);
+    width: 8px;
+  }
+
+  .subs__scrollbar::-webkit-scrollbar-button {
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .subs__scrollbar::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(gray, gray);
+    border-radius: 10px;
+  }
 }
 
-.floating__header_darkMode {
-  @apply dark:bg-gray-900 m-2 dark:bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
+@layer tailwind {
+  .floating__header_lightMode {
+    @apply bg-slate-200 m-2 bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
+  }
+
+  .floating__header_darkMode {
+    @apply dark:bg-gray-900 m-2 dark:bg-opacity-80 backdrop-blur-xl right-0 left-0 rounded-lg
+  }
+}
+
+@layer MobileScreens {
+  @media (min-width: 320px) {
+    .small {
+      margin-left: 6.5rem;
+    }
+  }
+
+  @media (min-width: 375px) {
+    .medium {
+      margin-left: 8rem;
+    }
+  }
+
+  @media (min-width: 425px) {
+    .large {
+      margin-left: 9.5rem;
+
+    }
+  }
 }
