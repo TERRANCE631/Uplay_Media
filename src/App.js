@@ -7,7 +7,7 @@ function App() {
   const [showManu, setShowManu] = useState(false);
 
   return (
-    <div className="dark:bg-gray-700 bg-slate-100 overflow-x-hidden">
+    <div className="dark:bg-gray-700 bg-slate-100 overflow-hidden">
       <Header setShowManu={setShowManu} />
       <SideManu />
       {showManu && <SlideIn setShowManu={setShowManu} />}

@@ -4,7 +4,6 @@ import { videos } from "../../Pages/Home/Components/VideoList";
 
 export function SearchBar() {
     const { setValue, value } = GlobalContext();
-    console.log(videos);
 
     const filter = videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) })
     return (

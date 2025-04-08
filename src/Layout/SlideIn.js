@@ -24,7 +24,7 @@ export function SlideIn({ setShowManu }) {
                         </span>
                     </Link>
                 </section>
-                <section className="h-100 overflow-y-auto subs__scrollbar pr-2">
+                <section className="h-full overflow-y-scroll subs__scrollbar pr-2">
                     <div className="pt-6">
                         <div className="flex flex-col gap-2">
                             {slideList.map((icon, i) => {

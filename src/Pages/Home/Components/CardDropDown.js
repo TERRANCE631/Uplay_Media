@@ -1,4 +1,4 @@
-import { BiDownload, BiLike, BiSolidLike } from 'react-icons/bi'
+import { BiDownload, BiLike } from 'react-icons/bi'
 
 export function CardDropDown() {
     return (

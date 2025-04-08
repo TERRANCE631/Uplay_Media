@@ -1,6 +1,7 @@
 import { BiLayout } from "react-icons/bi";
 import { manuList } from "./components/ManuList";
-import { Subscriber, subsList } from "./components/SubsList";
+import { subsList } from "./components/SubsList";
+import { Link } from "react-router-dom";
 
 export function SideManu() {
   return (
@@ -9,10 +10,10 @@ export function SideManu() {
       <div className="flex flex-col gap-2">
         {manuList.map((icon, i) => {
           return (
-            <button key={i} className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 
-            rounded-lg py-2 flex flex-col justify-center items-center hover:text-white">
+            <Link key={i} to={icon.link} className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 
+                rounded-lg py-2 flex flex-col justify-center items-center hover:text-white">
               {icon.icon}
-            </button>
+            </Link>
           )
         })}
       </div>

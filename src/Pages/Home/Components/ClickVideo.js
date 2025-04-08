@@ -2,7 +2,6 @@ import React from 'react'
 import { videos } from './VideoList'
 import { HomeCard } from './HomeCard'
 import { VideoFilter } from './VideoFilter'
-import { Shorts } from './Shorts'
 
 export function ClickVideo() {
     return (

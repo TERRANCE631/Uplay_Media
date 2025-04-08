@@ -10,16 +10,16 @@ export function HomeCard({ video }) {
         <section className="h-full">
             <div className="p-2 mx-3 h-full flex flex-col mb-4 border bg-gray-300 
             dark:bg-gray-600 border-black rounded-lg">
-                <Link to={`${video.id}`} className="">
+                <Link to="/videoPlayer" className="">
                     <img src={video.video} alt="" className="h-[10rem] bg-white rounded-lg w-full object-cover 
                     object-center" />
                 </Link>
 
                 <section className="flex">
-                    <Link to="/" className="flex flex-wrap">
+                    <Link to="/videoPlayer" className="flex flex-wrap">
                         {video.title.split(" ").map((title, i) => {
                             return (
-                                <section>
+                                <section key={i}>
                                     <div className={`${i >= 6
                                         ? "hidden"
                                         : `${i === 5 ? "text-2xl font-bold truncate"

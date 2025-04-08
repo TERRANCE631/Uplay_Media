@@ -5,10 +5,12 @@ import { useWindowScroll } from "react-use";
 import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
+import { GlobalContext } from "../Hooks/Context/useContext";
 
 export function Header({ setShowManu }) {
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setProfile] = useState(false);
+  const { setValue } = GlobalContext()
 
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const { y: currentScrollY } = useWindowScroll();
@@ -31,6 +33,7 @@ export function Header({ setShowManu }) {
       element.classList.add("floating__header_lightMode")
       setProfile(false);
       setShowSearch(false);
+      setValue("")
 
     } else if (currentScrollY === 0 && !darkMode) {
       element.classList.remove("floating__header_lightMode")
@@ -38,6 +41,7 @@ export function Header({ setShowManu }) {
       element.classList.add("floating__header_darkMode")
       setProfile(false);
       setShowSearch(false);
+      setValue("")
 
     } else if (currentScrollY === 0 && darkMode) {
       element.classList.remove("floating__header_darkMode")
