@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "../Pages/Home/HomePage";
-import { VideoPlayer } from "../Pages";
+import { CreatePost, UserDetails, VideoPlayer } from "../Pages";
 
 export function AllRoutes() {
   return (
@@ -8,6 +8,8 @@ export function AllRoutes() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/videoPlayer" element={<VideoPlayer />}></Route>
+        <Route path="/Home/User/profile/" element={<UserDetails />}></Route>
+        <Route path="/Home/New/Post/" element={<CreatePost />}></Route>
       </Routes>
     </>
   );

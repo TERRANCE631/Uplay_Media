@@ -3,18 +3,21 @@ import { BiSolidSend } from 'react-icons/bi'
 
 export function Comments() {
     const commentList = [
-        "Good keep them comming!", "Nice", "How did u do that?", "Good keep them comming!", "Good keep them comming!"
+        "Good keep them comming!", 
+        "Nice", 
+        "How did u do that?", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!", 
+        "Good keep them comming!"
     ]
     return (
         <section className="h-full">
-            <div className="">
-                <p className="text-gray-600 flex gap-2 md:text-md text-sm dark:text-gray-100">
-                    <span className="font-bold">Likes: </span><span>100k</span>
-                    <span className="font-bold">Downloads: </span><span>20k</span>
-                    <span className="font-bold">Clicks: </span><span>50k</span>
-                </p>
-            </div>
-            <div className="mt-5 flex items-center">
+            <div className="flex items-center">
                 <input
                     type="text"
                     className="w-full border py-1.5 pl-4 border-blue-700 shadow-inner shadow-gray-500 text-black 
@@ -28,11 +31,12 @@ export function Comments() {
                     <BiSolidSend />
                 </button>
             </div>
-            <div className="my-5">
+            <p className="h-2">Comments: ({commentList.length})</p>
+            <div className="my-5 lg:h-[55%] overflow-y-auto subs__scrollbar pr-2">
                 {commentList.map((comment, i) => {
                     return (
                         <div key={i} className="">
-                            <div className="flex items-baseline border-gray-400 border-b gap-2">
+                            <div className="flex items-baseline bg-gray-300/30 gap-2 mb-2 px-2 py-1">
                                 <button className="">
                                     <p className="font-bold text-gray-600 dark:text-gray-300">Terrance:</p>
                                 </button>

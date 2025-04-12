@@ -6,7 +6,7 @@ export function CardDropDown() {
                 md:mt-[10.5rem] small medium large mt-[11rem] bg-black/20 backdrop-blur-lg">
             <section className="p-2 shadow-inner shadow-black rounded-lg">
                 <div role="button" className="flex border my-1 text-lg bg-gray-400/50 
-                hover:bg-gray-400 rounded-lg p-2 justify-center items-center gap-1">
+                hover:bg-gray-400 rounded-lg p-1 justify-center items-center gap-1">
                     <p className="text-blue-600">
                         <BiLike />
                     </p>
@@ -15,7 +15,7 @@ export function CardDropDown() {
                 <div className="border-b" />
 
                 <div role="button" className="flex border my-1 text-lg justify-center bg-gray-400/50 
-                    hover:bg-gray-400 rounded-lg p-2 items-center gap-1">
+                    hover:bg-gray-400 rounded-lg p-1 items-center gap-1">
                     <p className="text-blue-600">
                         <BiDownload />
                     </p>

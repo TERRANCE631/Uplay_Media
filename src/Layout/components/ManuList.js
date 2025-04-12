@@ -1,4 +1,4 @@
-import { BiAddToQueue, BiHome } from "react-icons/bi";
+import { BiHome, BiPlus, } from "react-icons/bi";
 
 export const manuList = [
     {
@@ -6,7 +6,7 @@ export const manuList = [
         link: "/"
     },
     {
-        icon: <BiAddToQueue className="scale-150" />,
-        link: "/"
+        icon: <BiPlus className="scale-150" />,
+        link: "/Home/New/Post/"
     }
 ]

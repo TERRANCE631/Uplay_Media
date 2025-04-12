@@ -17,7 +17,10 @@ export function SlideIn({ setShowManu }) {
                         className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
                         &#9776;
                     </div>
-                    <Link to="/">
+                    <Link
+                        onClick={() => setShowManu(false)}
+                        to="/"
+                    >
                         <span className="md:mx-5 mx-2 flex items-center md:scale-125 tracking-wider">
                             <span className="text-4xl text-red-500 font-extrabold">U</span>
                             <span className="text-xl">play</span>
@@ -30,28 +33,37 @@ export function SlideIn({ setShowManu }) {
                             {slideList.map((icon, i) => {
                                 return (
                                     <button>
-                                        <p key={i} className="truncate my-2 hover:bg-gray-500/10 bg-gray-500/20 rounded-lg py-2 flex
-                                     flex-col justify-center items-center">
+                                        <Link
+                                            to={icon.link}
+                                            onClick={() => setShowManu(false)}
+                                            key={i}
+                                            className="truncate my-2 hover:bg-gray-500/10 bg-gray-500/20 rounded-lg py-2 flex
+                                            flex-col justify-center items-center">
                                             {icon.icon}
-                                            <p className="mt-0.5 md:text-md text-xs">
+                                            <p className="mt-0.5 md:text-[0.9rem] text-xs">
                                                 {icon.title}
                                             </p>
-                                        </p>
+                                        </Link>
                                     </button>
                                 )
                             })}
                         </div>
                         <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-                        <div role="button" className="md:text-md">
+                        <Link
+                            onClick={() => setShowManu(false)}
+                            to="/Home/User/profile/"
+                            role="button"
+                            className="md:text-md"
+                        >
                             <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 rounded-lg py-2 flex flex-col 
                         justify-center items-center">
                                 <BiLayout className="scale-150" />
-                                <p className="mt-0.5  text-xs">
+                                <p className="mt-0.5 md:text-[0.9rem] text-xs">
                                     My videos
                                 </p>
                             </p>
-                        </div>
+                        </Link>
                     </div>
                     <div className="border-b my-4 border-gray-500 dark:border-white" />
 

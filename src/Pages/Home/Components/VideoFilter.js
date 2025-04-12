@@ -6,9 +6,9 @@ export function VideoFilter() {
     return (
         <div
             role="button"
-            className="flex lg:ml-6 md:text-md text-sm gap-4 truncate"
+            className="flex md:ml-2 md:text-md text-sm gap-4 truncate"
         >
-            <div className="flex overflow-x-auto gap-4">
+            <div className="flex overflow-x-auto gap-2 filter__scrollbar">
                 {videoFilterList.map((title, i) => {
                     return (
                         <div

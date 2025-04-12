@@ -25,15 +25,28 @@ body {
     background-image: linear-gradient(gray, gray);
     border-radius: 10px;
   }
+
+  .filter__scrollbar::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .filter__scrollbar::-webkit-scrollbar {
+    height: 0px;
+    background-image: linear-gradient(transparent, transparent);
+  }
+
+  .filter__scrollbar::-webkit-scrollbar-button {
+    background-image: linear-gradient(transparent, transparent);
+  }
 }
 
 @layer tailwind {
   .floating__header_lightMode {
-    @apply bg-slate-200 m-2 bg-opacity-95 backdrop-blur-2xl right-0 left-0 rounded-lg
+    @apply bg-slate-200 backdrop-blur-2xl
   }
 
   .floating__header_darkMode {
-    @apply dark:bg-gray-900 m-2 dark:bg-opacity-95 backdrop-blur-2xl right-0 left-0 rounded-lg
+    @apply dark:bg-gray-900 backdrop-blur-2xl
   }
 }
 
@@ -55,5 +68,13 @@ body {
       margin-left: 9.5rem;
 
     }
+  }
+}
+
+@layer upload__btn {
+  ::-webkit-file-upload-button {
+    background-color: transparent;
+    border: none;
+    opacity: 0;
   }
 }

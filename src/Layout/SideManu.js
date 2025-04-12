@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function SideManu() {
   return (
-    <div className="fixed md:flex hidden flex-col mt-[4rem] truncate px-2 pt-4 -z-0 left-0 
+    <div className="fixed md:flex hidden border-r backdrop-blur-2xl z-10 flex-col mt-[4rem] truncate px-2 pt-4 left-0 
     xl:w-[4rem] lg:w-[6%] md:w-[8%] dark:text-white h-screen">
       <div className="flex flex-col gap-2">
         {manuList.map((icon, i) => {
@@ -19,23 +19,38 @@ export function SideManu() {
       </div>
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-      <div role="button" className="hover:text-white">
+      <Link to="/Home/User/profile/" role="button" className="hover:text-white">
         <p className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 rounded-lg py-2 flex 
         flex-col justify-center items-center">
           <BiLayout className="scale-150" />
         </p>
-      </div>
+      </Link>
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-      <div className="h-60 overflow-y-hidden">
+      <div className="h-60 flex flex-col justify-center items-center overflow-y-hidden">
         {subsList.map((sub, i) => {
           return (
-            <button className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-2">
+            <button className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-0.5">
               <img src="/Assets/profile.png" alt="" className="object-cover bg-white object-center h-full w-full rounded-full" />
             </button>
           )
         })}
       </div>
+
+      <span className="flex justify-center items-center hover:bg-gray-500/30 rounded-lg p-1">
+        <svg
+          data-accordion-icon
+          className="w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          >
+          </path>
+        </svg>
+      </span>
     </div>
   )
 }

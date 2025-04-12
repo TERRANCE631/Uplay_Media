@@ -5,36 +5,42 @@ import { CardDropDown } from './CardDropDown'
 export function HomeCard({ video }) {
     const [showDropDown, setShowDropDown] = useState(false);
     const [videoID, setVideoID] = useState(null);
-    
+
     return (
         <section className="h-full">
-            <div className="p-2 mx-3 h-full flex flex-col mb-4 border bg-gray-300 
-            dark:bg-gray-600 border-black rounded-lg">
+            <div className="h-full w-full flex flex-col mb-4 bg-white 
+            dark:bg-gray-600 shadow-lg border-b border-black md:border-none">
                 <Link to="/videoPlayer" className="">
-                    <img src={video.video} alt="" className="h-[10rem] bg-white rounded-lg w-full object-cover 
-                    object-center" />
+                    <video
+                        src={video.video}
+                        onError={(e) => {
+                            e.target.src = "/Assets/feature-5.mp4"
+                        }}
+                        alt=""
+                        className="h-[10rem] bg-white w-full object-cover object-center"
+                    />
                 </Link>
 
-                <section className="flex">
+                <section className="flex p-1">
                     <Link to="/videoPlayer" className="flex flex-wrap">
                         {video.title.split(" ").map((title, i) => {
                             return (
-                                <section key={i}>
-                                    <div className={`${i >= 6
+                                <section key={i} className='flex items-center'>
+                                    <span className={`${i >= 6
                                         ? "hidden"
-                                        : `${i === 5 ? "text-2xl font-bold truncate"
-                                            : "text-2xl mr-2.5 font-bold truncate"}`}`}
+                                        : `${i === 5 ? "text-xl flex items-center font-bold truncate"
+                                            : "text-xl mr-1 font-bold truncate"}`}`}
                                     >
                                         {title}
-                                    </div>
-                                    {i === 6 && <div className="text-3xl font-bold">...</div>}
+                                    </span>
+                                    {i === 6 && <span className="text-xl flex items-center font-semibold">...</span>}
                                 </section>
                             )
                         })}
                     </Link>
                 </section>
 
-                <section className="flex items-center justify-between">
+                <section className="flex p-1 h-full items-center justify-between">
                     <Link to="/"
                         className="flex items-center mt-2 -mb-2 gap-1"
                     >

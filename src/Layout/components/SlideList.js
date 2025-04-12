@@ -1,12 +1,14 @@
-import { BiAddToQueue, BiHome} from "react-icons/bi";
+import { BiHome, BiPlus } from "react-icons/bi";
 
 export const slideList = [
     {
         icon: <BiHome className="scale-150" />,
-        title: "Home"
+        title: "Home",
+        link: "/"
     },
     {
-        icon: <BiAddToQueue className="scale-150" />,
-        title: "Subscritions"
+        icon: <BiPlus className="scale-150" />,
+        title: "New Video",
+        link: "/Home/New/Post/"
     }
 ]

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 import { Dropdown } from './Dropdown'
+import { BiAddToQueue, BiDownload, BiLike } from 'react-icons/bi';
 
 export function VideoOwner() {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -11,6 +12,14 @@ export function VideoOwner() {
         Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Soluta repellat iste ipsum molestiae modi praesentium.
       </p>
+      <div className="mt-4">
+        <p className="text-gray-600 flex gap-2 md:text-md text-sm dark:text-gray-100">
+          <span className="font-bold">Likes: </span><span>100k</span>
+          <span className="font-bold">Downloads: </span><span>20k</span>
+          <span className="font-bold">Clicks: </span><span>50k</span>
+        </p>
+      </div>
+
       <section className="truncate flex justify-between items-center 
             rounded-lg my-2 gap-1">
         <div className="truncate flex items-center gap-1">
@@ -19,26 +28,29 @@ export function VideoOwner() {
             <img src="/Assets/profile.png" alt="" className="object-cover object-center h-full w-full rounded-full" />
           </Link>
           <p className="truncate">Terrance</p>
-          <button className="truncate bg-gray-300 ml-4 shadow-gray-600 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
+          <button className="truncate flex items-center gap-2 bg-gray-300 ml-4 shadow-gray-600 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
             shadow-inner hover:bg-gray-200 px-4 py-1 
             border border-black/30 rounded-full"
           >
-            Subscribe
+            <span className="text-blue-800"><BiAddToQueue /></span>
+            <span>Subscribe</span>
           </button>
         </div>
         <div className="flex gap-4 p-2">
           <button
-            className="truncate md:block hidden bg-gray-300 hover:bg-gray-200 px-4 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
+            className="truncate md:flex items-center gap-2 hidden bg-gray-300 hover:bg-gray-200 px-4 hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
               py-1 rounded-full shadow-gray-600 
               shadow-inner border border-black/30"
           >
-            Download
+            <span className="text-blue-800"><BiDownload /></span>
+            <span>Download</span>
           </button>
-          <button className="truncate md:block hidden shadow-gray-600 shadow-inner hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
+          <button className="truncate md:flex items-center gap-2 hidden shadow-gray-600 shadow-inner hover:dark:bg-gray-500/40 dark:bg-gray-700/40 
             bg-gray-300 hover:bg-gray-200 px-4 py-1 
             rounded-full border border-black/30"
           >
-            Like
+            <span className="text-blue-800"><BiLike /></span>
+            <span>Like</span>
           </button>
           <Dropdown setShowDropDown={setShowDropDown} showDropDown={showDropDown} />
         </div>

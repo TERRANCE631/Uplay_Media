@@ -6,6 +6,7 @@ import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { GlobalContext } from "../Hooks/Context/useContext";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 export function Header({ setShowManu }) {
   const [showSearch, setShowSearch] = useState(false);
@@ -51,7 +52,8 @@ export function Header({ setShowManu }) {
 
   return (
     <header className="fixed z-50">
-      <nav ref={scrollRef} className="fixed transition-all inset-x-0 duration-500 dark:text-white h-[4.5rem] flex justify-between items-center px-4">
+      <nav ref={scrollRef} className="fixed backdrop-blur-2xl z-20 border-b transition-all inset-x-0 duration-300 dark:text-white h-[4.5rem] flex 
+      justify-between items-center px-4">
         <section className="flex items-center">
           <div
             onClick={() => setShowManu(true)}
@@ -95,8 +97,8 @@ export function Header({ setShowManu }) {
       </nav>
       {
         showProfile
-        && <ProfileDropdownLoggedOut />
-        // && <ProfileDropdown />
+        // && <ProfileDropdownLoggedOut />
+        && <ProfileDropdown setProfile={setProfile}/>
       }
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
     </header>
