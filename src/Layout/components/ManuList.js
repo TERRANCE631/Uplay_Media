@@ -7,6 +7,6 @@ export const manuList = [
     },
     {
         icon: <BiPlus className="scale-150" />,
-        link: "/Home/New/Post/"
+        link: null
     }
 ]

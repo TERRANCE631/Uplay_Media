@@ -7,22 +7,25 @@ export function VideoPlayer() {
     const [toggle, setToggle] = useState(true);
     return (
         <section>
-            <div className="flex flex-col justify-center lg:mb-10">
-                <section className="grid xl:pr-10 md:pl-2 pl-1 pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
-                    <div className="w-full xl:min-h-[28rem] 2xl:min-h-[45rem] md:min-h-[25rem] 
-                        h-[16rem]" >
-                        <video src="/Assets/feature-5.mp4" controls className="object-cover scale-100 object-center w-full h-full" />
-                        <section className="h-full lg:block hidden">
+            <div className="flex flex-col justify-center">
+                <section className="grid xl:pr-10 md:pl-2 md:pl-1 md:pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
+                    <div className="">
+                        <div className="w-full xl:h-[28rem] 2xl:h-[45rem] lg:h-[22rem] md:h-[23rem] 
+                        h-[16rem]">
+                            <video src="/Assets/feature-5.mp4" controls className="object-cover scale-100 shrink-0 
+                            object-center w-full h-full" />
+                        </div>
+                        <section className="lg:block hidden">
                             <VideoOwner />
                             <p className="border-b dark:border-white/20 border-black/30 mb-5" />
                             <Comments />
                         </section>
                     </div>
-                    <section className="h-full lg:hidden block">
+                    <section className="h-full lg:hidden block px-2">
                         <VideoOwner />
                     </section>
 
-                    <div className="w-full shrink-0 h-full truncate">
+                    <div className="w-full min-h-full truncate">
                         {toggle && <div className="border-dashed lg:block hidden border mb-2 border-black rounded-t-lg w-full 
                         2xl:h-[8rem] h-[6rem]">
                             <video autoPlay muted loop src="/Assets/feature-5.mp4" alt="" className="object-cover object-center 

@@ -3,9 +3,7 @@
     {
       "name": "Boris",
       "email": "Terrance@example.com",
-      "password": "Terrance@1",
-      "id": 1,
-      "token": "1a2b3c4d5e6f7g8h9i1j0k"
+      "id": 1
     }
   ],
   "videos": [

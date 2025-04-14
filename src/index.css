@@ -42,7 +42,7 @@ body {
 
 @layer tailwind {
   .floating__header_lightMode {
-    @apply bg-slate-200 backdrop-blur-2xl
+    @apply bg-slate-100 backdrop-blur-2xl
   }
 
   .floating__header_darkMode {

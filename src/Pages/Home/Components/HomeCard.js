@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CardDropDown } from './CardDropDown'
+import { GlobalContext } from '../../../Hooks/Context/useContext';
 
 export function HomeCard({ video }) {
     const [showDropDown, setShowDropDown] = useState(false);
     const [videoID, setVideoID] = useState(null);
+    const { likes, Likes } = GlobalContext()
 
     return (
         <section className="h-full">
             <div className="h-full w-full flex flex-col mb-4 bg-white 
             dark:bg-gray-600 shadow-lg border-b border-black md:border-none">
-                <Link to="/videoPlayer" className="">
+                <Link to="/videoPlayer" onClick={() => Likes(likes)} className="">
                     <video
                         src={video.video}
                         onError={(e) => {
@@ -25,7 +27,7 @@ export function HomeCard({ video }) {
                     <Link to="/videoPlayer" className="flex flex-wrap">
                         {video.title.split(" ").map((title, i) => {
                             return (
-                                <section key={i} className='flex items-center'>
+                                <section onClick={() => Likes(likes)} key={i} className='flex items-center'>
                                     <span className={`${i >= 6
                                         ? "hidden"
                                         : `${i === 5 ? "text-xl flex items-center font-bold truncate"
@@ -49,9 +51,13 @@ export function HomeCard({ video }) {
                             w-full h-full" />
                         </div>
                         < div
-                            className="font-semibold text-gray-600 dark:text-gray-300"
+                            className="font-semibold text-gray-600 truncate dark:text-gray-300"
                         >
                             {video.name}
+                            <p className="font-normal text-xs truncate">
+                                <span className="bg-gray-400 dark:bg-gray-800 px-2 text-white">Clicks</span>
+                                <span className="truncate w-2"> 7k</span>
+                            </p>
                         </div>
                     </Link>
 

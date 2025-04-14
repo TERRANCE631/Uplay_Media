@@ -9,6 +9,6 @@ export const slideList = [
     {
         icon: <BiPlus className="scale-150" />,
         title: "New Video",
-        link: "/Home/New/Post/"
+        link: null
     }
 ]

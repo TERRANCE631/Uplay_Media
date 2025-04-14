@@ -4,7 +4,7 @@ import { slideList } from './components/SlideList'
 import { Link } from 'react-router-dom'
 import { subsList } from './components/SubsList'
 
-export function SlideIn({ setShowManu }) {
+export function SlideIn({ setShowManu, setShowCreatePost }) {
     return (
         <section className="fixed w-full flex flex-col z-50 bg-black bg-opacity-50 px-4 pt-4 left-0 text-black 
          dark:text-white h-screen">
@@ -12,7 +12,7 @@ export function SlideIn({ setShowManu }) {
             flex-col z-50 truncate px-4 pt-4 left-0 top-0 h-screen">
                 <section className="flex items-center">
                     <div
-                        onClick={() => setShowManu(false)}
+                        onClick={() => {setShowManu(false)}}
                         role="button"
                         className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
                         &#9776;
@@ -35,7 +35,7 @@ export function SlideIn({ setShowManu }) {
                                     <button>
                                         <Link
                                             to={icon.link}
-                                            onClick={() => setShowManu(false)}
+                                            onClick={() => { setShowManu(false); i === 1 ? setShowCreatePost((prev) => !prev) : setShowCreatePost(false) }}
                                             key={i}
                                             className="truncate my-2 hover:bg-gray-500/10 bg-gray-500/20 rounded-lg py-2 flex
                                             flex-col justify-center items-center">
@@ -56,8 +56,8 @@ export function SlideIn({ setShowManu }) {
                             role="button"
                             className="md:text-md"
                         >
-                            <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 rounded-lg py-2 flex flex-col 
-                        justify-center items-center">
+                            <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 
+                            rounded-lg py-2 flex flex-col justify-center items-center">
                                 <BiLayout className="scale-150" />
                                 <p className="mt-0.5 md:text-[0.9rem] text-xs">
                                     My videos

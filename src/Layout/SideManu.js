@@ -3,14 +3,18 @@ import { manuList } from "./components/ManuList";
 import { subsList } from "./components/SubsList";
 import { Link } from "react-router-dom";
 
-export function SideManu() {
+export function SideManu({ setShowCreatePost }) {
   return (
-    <div className="fixed md:flex hidden border-r backdrop-blur-2xl z-10 flex-col mt-[4rem] truncate px-2 pt-4 left-0 
-    xl:w-[4rem] lg:w-[6%] md:w-[8%] dark:text-white h-screen">
+    <div className="fixed md:flex hidden border-r backdrop-blur-2xl bg-white z-30 flex-col mt-[4rem] truncate px-2 pt-4 left-0 
+    xl:w-[4rem] lg:w-[6%] md:w-[8%] dark:text-white h-screen dark:bg-gray-700">
       <div className="flex flex-col gap-2">
         {manuList.map((icon, i) => {
           return (
-            <Link key={i} to={icon.link} className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 
+            <Link
+              key={i}
+              onClick={() => i === 1 ? setShowCreatePost((prev) => !prev) : setShowCreatePost(false)}
+              to={icon.link}
+              className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 
                 rounded-lg py-2 flex flex-col justify-center items-center hover:text-white">
               {icon.icon}
             </Link>
@@ -19,7 +23,11 @@ export function SideManu() {
       </div>
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-      <Link to="/Home/User/profile/" role="button" className="hover:text-white">
+      <Link
+        to="/Home/User/profile/"
+        role="button"
+        className="hover:text-white"
+      >
         <p className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 rounded-lg py-2 flex 
         flex-col justify-center items-center">
           <BiLayout className="scale-150" />

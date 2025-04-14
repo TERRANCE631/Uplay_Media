@@ -18,9 +18,18 @@ export function VideoList({ user }) {
                             />
 
                         </div>
-                        <div className="h-full pl-1">
+                        <div className="h-full p-1 w-full" >
                             <p className="font-bold">{vid.title}</p>
-                            <p className="">{vid.date}</p>
+                            <div className="flex justify-between">
+                                <p className="text-xs">{vid.date}</p>
+                                <p className="text-xs">
+                                    <span className="bg-gray-500 dark:bg-gray-800 font-semibold text-white tracking-wide md:px-0 px-1"
+                                    >
+                                        Downlaods
+                                    </span>
+                                    <span className=""> 10k</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )

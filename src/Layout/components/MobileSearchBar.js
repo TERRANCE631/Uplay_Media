@@ -8,12 +8,12 @@ export function MobileSearchBar({ currentScrollY, showSearch }) {
     const filter = videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) })
 
     return (
-        <section className={`${currentScrollY > 0 ? "w-screen mt-5 transition-all duration-500"
+        <section className={`${currentScrollY > 0 ? "w-screen transition-all duration-500"
             : showSearch ? "w-screen h-screen bg-black bg-opacity-20 transition-all duration-500"
                 : "w-screen transition-all duration-500 shadow-xl shadow-black"}`}>
             {showSearch &&
-                <nav className="flex items-center flex-grow w-full justify-center">
-                    <section className="mt-[4.7rem] flex w-full flex-grow px-4 items-center md:hidden">
+                <nav className="flex items-center my-1 flex-grow w-full justify-center">
+                    <section className="mt-[4.7rem] flex w-full flex-grow px-0.5 items-center md:hidden">
                         <input
                             onChange={(e) => setValue(e.target.value)}
                             type="text"
@@ -34,8 +34,8 @@ export function MobileSearchBar({ currentScrollY, showSearch }) {
                     </section>
                 </nav>}
             {value !== "" && filter.length &&
-                <result className={`${currentScrollY > 0 ? "flex md:hidden my-[4.5rem] justify-center items-center inset-x-0 top-[4.5rem] ite min-h-20 absolute" 
-                : "flex md:hidden my-12 justify-center items-center inset-x-0 top-[4.5rem] ite min-h-20 absolute"}`}>
+                <result className={`${currentScrollY > 0 ? "flex md:hidden my-[3.5rem] justify-center items-center inset-x-0 top-[4.5rem] min-h-20 absolute" 
+                : "flex md:hidden justify-center items-center inset-x-0 top-[4.5rem] min-h-20 absolute"}`}>
                     <section className="w-[90%] flex flex-col p-2 rounded-lg truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.map((name, i) => {
                             return (

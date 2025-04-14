@@ -12,7 +12,7 @@ import { stats } from './Dashboard'
 
 export function AnaliticGraph() {
     return (
-        <div className="reletive h-[400px] mt-4 pt-4 pb-2 bg-gray-200 mb-5 md:w-full flex justify-center border items-center rounded-lg">
+        <div className="reletive h-[400px] mt-2 pt-4 md:w-full flex justify-center border items-center rounded-lg">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                     margin={{

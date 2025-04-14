@@ -52,7 +52,8 @@ export function Header({ setShowManu }) {
 
   return (
     <header className="fixed z-50">
-      <nav ref={scrollRef} className="fixed backdrop-blur-2xl z-20 border-b transition-all inset-x-0 duration-300 dark:text-white h-[4.5rem] flex 
+      <nav ref={scrollRef} className="fixed backdrop-blur-2xl z-20 md:border-b transition-all inset-x-0 duration-300
+       dark:text-white h-[4.5rem] flex 
       justify-between items-center px-4">
         <section className="flex items-center">
           <div
@@ -97,8 +98,8 @@ export function Header({ setShowManu }) {
       </nav>
       {
         showProfile
-        // && <ProfileDropdownLoggedOut />
-        && <ProfileDropdown setProfile={setProfile}/>
+        && <ProfileDropdownLoggedOut />
+        // && <ProfileDropdown setProfile={setProfile}/>
       }
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
     </header>
