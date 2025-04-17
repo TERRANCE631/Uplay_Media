@@ -28,7 +28,7 @@ export function UserInfor({ users, user }) {
             </div>
 
             <div className="flex pt-0 xl:pl-[14.5rem] md:pl-[9.3rem] xl:text-lg md:text-lg text-sm">
-                <div className="absolute flex right-0 text-xs md:text-[1rem] text-gray-200 mt-1 gap-2">
+                <div className="absolute flex right-0 text-xs md:text-[1rem] dark:text-gray-200 mt-1 gap-2">
                     <p className="right-0">
                         <span className="font-semibold tracking-wide">Started using uplay: </span>
                         <span>02 May 2024</span>

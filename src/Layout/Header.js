@@ -8,7 +8,7 @@ import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { GlobalContext } from "../Hooks/Context/useContext";
 import { ProfileDropdown } from "./ProfileDropdown";
 
-export function Header({ setShowManu }) {
+export function Header({ setShowManu, setLogin, setRegister }) {
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setProfile] = useState(false);
   const { setValue } = GlobalContext()
@@ -98,7 +98,7 @@ export function Header({ setShowManu }) {
       </nav>
       {
         showProfile
-        && <ProfileDropdownLoggedOut />
+        && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />
         // && <ProfileDropdown setProfile={setProfile}/>
       }
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />

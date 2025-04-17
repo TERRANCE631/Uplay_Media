@@ -1,6 +1,7 @@
 import { BiSearch } from "react-icons/bi";
 import { GlobalContext } from "../../Hooks/Context/useContext";
 import { videos } from "../../Pages/Home/Components/VideoList";
+import { Link } from "react-router-dom";
 
 export function SearchBar() {
     const { setValue, value } = GlobalContext();
@@ -30,7 +31,11 @@ export function SearchBar() {
                 <BiSearch />
             </button>
             {value !== "" && filter.length !== 0 &&
-                <result className="flex ml-10 justify-center items-center backdrop- inset-x-0 top-[4.5rem] ite min-h-20 absolute">
+                <Link
+                    to="/Home/search results/"
+                    onClick={() => setValue("")}
+                    className="flex ml-10 justify-center items-center backdrop- inset-x-0 top-[4.5rem] ite min-h-20 absolute"
+                >
                     <section className="w-[80%] flex flex-col p-2 rounded-lg dark:bg-gray-600 truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.slice(0, 8).map((name, i) => {
                             return (
@@ -38,7 +43,7 @@ export function SearchBar() {
                             )
                         })}
                     </section>
-                </result>}
+                </Link>}
         </section>
     )
 }

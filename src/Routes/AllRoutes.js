@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "../Pages/Home/HomePage";
-import { UserDetails, VideoPlayer } from "../Pages";
+import { SearchResultsPage, UserDetails, VideoPlayer } from "../Pages";
 
 export function AllRoutes() {
   return (
@@ -9,6 +9,7 @@ export function AllRoutes() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/videoPlayer" element={<VideoPlayer />}></Route>
         <Route path="/Home/User/profile/" element={<UserDetails />}></Route>
+        <Route path="/Home/search results/" element={<SearchResultsPage />}></Route>
       </Routes>
     </>
   );
