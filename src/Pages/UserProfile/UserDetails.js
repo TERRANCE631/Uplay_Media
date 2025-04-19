@@ -38,6 +38,7 @@ export function UserDetails() {
                                                         </div>
                                                         <div className="text-center">
                                                             <span className="mr-2">{icon.dot}</span>
+                                                            {/* eslint-disable-next-line  */}
                                                             <span>{"Count:" + " " + icon.amount}</span>
                                                         </div>
                                                     </div>

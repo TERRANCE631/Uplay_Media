@@ -6,7 +6,7 @@ import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { GlobalContext } from "../Hooks/Context/useContext";
-import { ProfileDropdown } from "./ProfileDropdown";
+// import { ProfileDropdown } from "./ProfileDropdown";
 
 export function Header({ setShowManu, setLogin, setRegister }) {
   const [showSearch, setShowSearch] = useState(false);

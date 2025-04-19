@@ -6,7 +6,7 @@ import { GlobalContext } from '../../../Hooks/Context/useContext';
 
 export function VideoOwner() {
   const [showDropDown, setShowDropDown] = useState(false);
-  const { Downlaods, downnload, Likes, likes } = GlobalContext();
+  const { Downlaods, downnload, likes } = GlobalContext();
 
   return (
     <section className="">

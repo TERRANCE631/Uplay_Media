@@ -1,7 +1,5 @@
 import React from 'react'
 import { BiEdit } from 'react-icons/bi'
-import { dashboardList } from './Dashboard'
-import { AnaliticGraph } from './AnaliticGraph'
 
 export function UserInfor({ users, user }) {
     const videos = users.videos.filter((prev) => prev.id === (user.id))

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Header, SideManu } from "./Layout";
 import { SlideIn } from "./Layout/SlideIn";
 import { AllRoutes } from "./Routes/AllRoutes";
