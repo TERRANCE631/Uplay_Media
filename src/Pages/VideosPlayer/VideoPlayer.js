@@ -1,28 +1,93 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SideVideos } from './Components/SideVideos';
 import { VideoOwner } from './Components/VideoOwner';
 import { Comments } from './Components/Comments';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 export function VideoPlayer() {
+    const [videoDetails, setVideoDetails] = useState({});
+    const [videoList, setVideoList] = useState([]);
     const [toggle, setToggle] = useState(true);
+    const { id } = useParams();
+    const scrollRef = useRef(null);
+
+
+    const getVideoByID = () => {
+        axios.get(`http://localhost:9000/uplay/VideoPlayer/${id}`)
+            .then(res => {
+                const data = res.data;
+                setVideoDetails(data);
+            });
+    };
+
+    const getVideos = () => {
+        axios.get(`http://localhost:9000/uplay/getVideos`)
+            .then(res => {
+                const data = res.data;
+                setVideoList(data);
+            });
+    };
+
+    const { username, video, likes, downloads, clicks, photo, title } = videoDetails
+    useEffect(() => {
+        getVideos();
+        getVideoByID();
+        // eslint-disable-next-line 
+    }, [id]);
+
     return (
-        <section>
+        <section ref={scrollRef}>
             <div className="flex flex-col justify-center">
                 <section className="grid xl:pr-10 md:pl-2 md:pl-1 md:pr-2 w-full lg:grid-cols-[2fr_1fr] grid-cols-1 gap-4">
                     <div className="">
                         <div className="w-full xl:h-[28rem] 2xl:h-[45rem] lg:h-[22rem] md:h-[23rem] 
-                        h-[16rem]">
-                            <video src="/Assets/feature-5.mp4" controls className="object-cover scale-100 shrink-0 
-                            object-center w-full h-full" />
+                        h-[16rem] flex grid-grow-0">
+                            <video
+                                src={video || "/Assets/feature-5.mp4"}
+                                autoPlay
+                                muted
+                                controls
+                                className="object-cover scale-100 shrink-0 
+                                object-center w-full h-full"
+                            />
                         </div>
                         <section className="lg:block hidden">
-                            <VideoOwner />
+                            {[null].map(() => {
+                                return (
+                                    <VideoOwner
+                                        getVideos={getVideos}
+                                        username={username}
+                                        likes={likes}
+                                        downloads={downloads}
+                                        clicks={clicks}
+                                        photo={photo}
+                                        title={title}
+                                        videoDetails={videoDetails}
+                                        id={id}
+                                    />
+                                )
+                            })}
                             <p className="border-b dark:border-white/20 border-black/30 mb-5" />
-                            <Comments />
+                            <Comments videoDetails={videoDetails} />
                         </section>
                     </div>
                     <section className="h-full lg:hidden block px-2">
-                        <VideoOwner />
+                        {[null].map(() => {
+                            return (
+                                <VideoOwner
+                                    getVideos={getVideos}
+                                    username={username}
+                                    likes={likes}
+                                    downloads={downloads}
+                                    clicks={clicks}
+                                    photo={photo}
+                                    title={title}
+                                    videoDetails={videoDetails}
+                                    id={id}
+                                />
+                            )
+                        })}
                     </section>
 
                     <div className="w-full min-h-full truncate">
@@ -40,10 +105,10 @@ export function VideoPlayer() {
                                 </button>
                             </div>
                         </div>}
-                        <SideVideos />
+                        <SideVideos scrollRef={scrollRef} videoList={videoList} videoDetails={videoDetails} />
                         <section className="h-full lg:hidden block">
                             <p className="border-b dark:border-white border-black/50 my-5" />
-                            <Comments />
+                            <Comments videoDetails={videoDetails} />
                         </section>
                     </div>
                 </section>

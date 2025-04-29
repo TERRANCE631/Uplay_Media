@@ -7,7 +7,7 @@ export function AllRoutes() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/videoPlayer" element={<VideoPlayer />}></Route>
+        <Route path="/videoPlayer/:id" element={<VideoPlayer />}></Route>
         <Route path="/Home/User/profile/" element={<UserDetails />}></Route>
         <Route path="/Home/search results/" element={<SearchResultsPage />}></Route>
       </Routes>

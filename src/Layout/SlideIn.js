@@ -3,8 +3,12 @@ import { BiLayout } from 'react-icons/bi'
 import { slideList } from './components/SlideList'
 import { Link } from 'react-router-dom'
 import { subsList } from './components/SubsList'
+import { GlobalContext } from '../Hooks/Context/useContext'
 
 export function SlideIn({ setShowManu, setShowCreatePost }) {
+    const { subs } = GlobalContext();
+    const userID = JSON.parse(sessionStorage.getItem("userID"));
+
     return (
         <section className="fixed w-full flex flex-col z-50 bg-black bg-opacity-50 px-4 pt-4 left-0 text-black 
          dark:text-white h-screen">
@@ -12,7 +16,7 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
             flex-col z-50 truncate px-4 pt-4 left-0 top-0 h-screen">
                 <section className="flex items-center">
                     <div
-                        onClick={() => {setShowManu(false)}}
+                        onClick={() => { setShowManu(false) }}
                         role="button"
                         className="rounded-full hover:bg-gray-500/70 bg-gray-500/30 px-2 py-[3px] scale-[130%] md:scale-[140%]">
                         &#9776;
@@ -69,15 +73,15 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
 
                     <p className="text-sm">Subscribtions</p>
                     <div role="button" className="">
-                        {subsList.map((sub, i) => {
+                        {subs.filter(item => item.userID === userID).map((sub, i) => {
                             return (
                                 <section key={i} className="bg-gray-500/20 truncate hover:bg-gray-500/10 flex items-center 
                                 rounded-lg my-2 px-2 gap-1">
                                     <button className="md:h-8 md:w-8 bg-white w-8 h-8 rounded-full border 
                                 hover:opacity-70 flex flex-col my-2">
-                                        <img src="/Assets/profile.png" alt="" className="object-cover object-center h-full w-full rounded-full" />
+                                        <img src={sub.profile_photo || "/Assets/profile.png"} alt="" className="object-cover object-center h-full w-full rounded-full" />
                                     </button>
-                                    <p className="truncate">Terrance</p>
+                                    <p className="truncate">{sub.sub__To}</p>
                                 </section>
                             )
                         })}

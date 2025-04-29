@@ -6,12 +6,13 @@ import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
 import { GlobalContext } from "../Hooks/Context/useContext";
-// import { ProfileDropdown } from "./ProfileDropdown";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 export function Header({ setShowManu, setLogin, setRegister }) {
   const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setProfile] = useState(false);
-  const { setValue } = GlobalContext()
+  const { setValue, profileDetails } = GlobalContext()
+  const token = JSON.parse(sessionStorage.getItem("userToken"));
 
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const { y: currentScrollY } = useWindowScroll();
@@ -92,15 +93,16 @@ export function Header({ setShowManu, setLogin, setRegister }) {
           </section>
 
           <button onClick={() => setProfile((prev) => !prev)} className="md:h-11 md:w-11 w-10 h-10 rounded-full border hover:opacity-70">
-            <img src="/Assets/profile.png" alt="" className="object-cover object-center h-full w-full rounded-full" />
+            <img src={profileDetails || "/Assets/profile.png"} onError={(e) => { e.target.src = "/Assets/profile.png" }}
+              alt="" className="object-cover object-center h-full w-full rounded-full" />
           </button>
         </section>
       </nav>
-      {
-        showProfile
-        && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />
-        // && <ProfileDropdown setProfile={setProfile}/>
-      }
+
+
+      {!token && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
+      {token && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
+
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
     </header>
   )

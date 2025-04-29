@@ -43,7 +43,7 @@ export function AnaliticGraph() {
                     <Legend />
                     <Line
                         type="monotone"
-                        dataKey="downnloads"
+                        dataKey="subscribers"
                         stroke="yellow"
                         fill="yellow"
                         activeDot={{ r: 10 }}
@@ -54,14 +54,6 @@ export function AnaliticGraph() {
                         dataKey="likes"
                         stroke="blue"
                         fill="blue"
-                        activeDot={{ r: 10 }}
-                        dot={{ r: 10 }}
-                    />
-                    <Line
-                        type="monotone"
-                        dataKey="clicks"
-                        stroke="green"
-                        fill="green"
                         activeDot={{ r: 10 }}
                         dot={{ r: 10 }}
                     />

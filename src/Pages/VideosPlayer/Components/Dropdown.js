@@ -18,7 +18,7 @@ export function Dropdown({ setShowDropDown, showDropDown }) {
                 </div>
             </button>
 
-            {showDropDown && <dropdown className="absolute md:hidden block right-0 md:w-[10rem] w-[40%] min-h-[6rem] rounded-lg 
+            {showDropDown && <dropdown className="absolute md:hidden block right-0 md:w-[10rem] w-[40%] rounded-lg 
                                 mt-[5px] bg-black/20 backdrop-blur-lg">
                 <section className="p-2 shadow-inner shadow-black rounded-lg">
                     <div role="button" className="flex border my-1 text-lg bg-gray-400/50 
@@ -29,14 +29,6 @@ export function Dropdown({ setShowDropDown, showDropDown }) {
                         <p className="">Like</p>
                     </div>
                     <div className="border-b" />
-
-                    <div role="button" className="flex border my-1 text-lg justify-center bg-gray-400/50 
-                                    hover:bg-gray-400 rounded-lg p-1 items-center gap-1">
-                        <p className="scale-[160%] mx-1 text-gray-800">
-                            <BiDownload />
-                        </p>
-                        <p className="">Download</p>
-                    </div>
                 </section>
             </dropdown>}
         </section>

@@ -1,21 +1,52 @@
-import { createContext, useContext, useState } from "react"
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react"
 
 const ContextWrapper = createContext(null);
 export function GlobalState({ children }) {
-    const [downnload, setDownload] = useState(0);
-    const [likes, setLikes] = useState(0);
+    const token = JSON.parse(sessionStorage.getItem("userToken"));
+    const userID = JSON.parse(sessionStorage.getItem("userID"));
 
+    const [profileDetails, setProfileDetails] = useState()
     const [value, setValue] = useState("");
+    const [subs, setSubs] = useState([]);
 
-    const Downlaods = (downlaods) => {
-        setDownload(downlaods + 1)
+    function getUser() {
+        axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`, {
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+        })
+            .then(res => {
+                const data = res.data
+                setProfileDetails(data.profile_Image)
+            })
     };
 
-    const Likes = (likes) => {
-        setLikes(likes + 1)
-    }
+    useEffect(() => {
+        getUser();
+        // eslint-disable-next-line
+    }, [token, userID]);
 
-    const values = { value, setValue, likes, setLikes, Downlaods, downnload, Likes, setDownload };
+    const GetSubscribers = () => {
+        axios.get("http://localhost:9000/uplay/getSubs")
+            .then(res => {
+                const data = res.data;
+                setSubs(data);
+            })
+    };
+
+    const scrollIntoView = (ref) => {
+        ref.current.scrollIntoView({ behavior: "smooth" })
+    };
+
+    const values = {
+        value,
+        setValue,
+        profileDetails,
+        getUser,
+        GetSubscribers,
+        subs,
+        setSubs,
+        scrollIntoView,
+    };
     return (
         <ContextWrapper.Provider value={values}>
             {children}

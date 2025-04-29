@@ -53,28 +53,54 @@ body {
 @layer MobileScreens {
   @media (min-width: 320px) {
     .small {
-      margin-left: 6.5rem;
+      margin-left: 9.5rem;
     }
   }
 
   @media (min-width: 375px) {
     .medium {
-      margin-left: 8rem;
+      margin-left: 11rem;
     }
   }
 
   @media (min-width: 425px) {
     .large {
-      margin-left: 9.5rem;
+      margin-left: 12.5rem;
 
     }
   }
 }
 
-@layer upload__btn {
+.upload__btn {
   ::-webkit-file-upload-button {
     background-color: transparent;
     border: none;
     opacity: 0;
+  }
+}
+
+.indicator-line {
+  @apply h-px w-[3px] rounded-full bg-white transition-all duration-200 ease-in-out;
+}
+
+.indicator-line.active {
+  animation: indicator-line 0.5s ease infinite;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+  0% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+
+  50% {
+    height: 16px;
+    transform: translateY(-4px);
+  }
+
+  100% {
+    height: 4px;
+    transform: translateY(-0px);
   }
 }

@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { BiErrorCircle, BiUndo, BiUserPlus } from 'react-icons/bi';
+import React, { useEffect, useState } from 'react'
+import { BiErrorCircle, BiNotification, BiUndo, BiUserPlus } from 'react-icons/bi';
 import axios from 'axios';
 
 export function Register({ setRegister, setLogin }) {
     const [profile_image, setProfile_image] = useState(null);
-    const [errors, setErrors] = useState({
-        Err_emptyInput: "",
+    const [registered, setRegistered] = useState("");
+
+    const [state, setState] = useState({
         usernameErr: "",
-        emailErr: "",
-        imageErr__emptyInput: "",
+        registered: "",
+        presentUsername: 0,
+        existingUser: ""
     });
 
     const [userDetails, setUserDetails] = useState({
@@ -16,32 +18,53 @@ export function Register({ setRegister, setLogin }) {
         email: "",
         password: "",
     });
-    const { username, email, password } = userDetails
+    const { username, email } = userDetails;
+
+    setTimeout(() => {
+        setRegistered("")
+    }, 1000 * 10);
+
+    useEffect(() => {
+        axios.get("http://localhost:9000/uplay/getUsername")
+            .then(res => {
+                const data = res.data;
+                const filter = data.filter((item) => item.username.includes(userDetails.username));
+                setState({ ...state, presentUsername: filter.length });
+            });
+        // eslint-disable-next-line
+    }, [userDetails.username]);
 
     const UserInputs = (e) => {
         e.preventDefault()
+        if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
+            return setState({ ...state, usernameErr: "Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers." });
 
-        if (!username || !email || !password || !profile_image) {
-            setErrors({ ...errors, Err_emptyInput: "Please fill all the fields!" })
-        };
+        if (state.presentUsername > 0) {
+            setState({ ...state, existingUser: "Username already exist, try another username" })
+        }
 
-        if (username && !username.match(/[A-Za-z0-9.@]/) || email && !email.match(/[A-Za-z0-9.@]/))
-            return setErrors({ ...errors, usernameErr: "Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers." });
+        const users = new FormData();
 
-        // const users = new FormData();
+        users.append("username", userDetails.username);
+        users.append("email", userDetails.email);
+        users.append("password", userDetails.password);
+        users.append("image", profile_image);
 
-        // users.append("username", userDetails.username);
-        // users.append("email", userDetails.email);
-        // users.append("password", userDetails.password);
-        // users.append("image", profile_image);
-
-        // try {
-        //     axios.post("http://localhost:9000/uplay/register", users)
-        //         .then(res => console.log(res.data))
-        //         .catch(error => console.log(error));
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try {
+            if (state.usernameErr === "" && !state.presentUsername > 0) {
+                axios.post("http://localhost:9000/uplay/register", users)
+                    .then(res => {
+                        const data = res.data
+                        setRegistered(data.registered);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 500);
+                    })
+                    .catch(error => console.log(error));
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
         setUserDetails({ ...userDetails, username: "", email: "", password: "" })
     };
@@ -53,37 +76,42 @@ export function Register({ setRegister, setLogin }) {
                 <p className="border-b dark:border-white border-gray-600 text-center text-xl 
                     font-extrabold tracking-wide dark:text-white text-gray-800">Sign Up</p>
 
-                <div className={`${errors.Err_emptyInput !== ""
+                <div className={`${state.usernameErr !== ""
                     ? "flex flex-col justify-center items-center duration-500 translate-x-0"
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
-
-                    <div className={`${errors.Err_emptyInput !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] p-2 text-sm flex absolute justify-center py-2 items-center rounded-lg border border-gray-600 dark:text-white"
-                        : "hidden"
-                        }`}>
-                        <p className="text-red-600 scale-150"><BiErrorCircle /></p>
-                        <p className="text-black tracking-wide">{errors.Err_emptyInput}</p>
-                    </div>
-                </div>
-
-                <div className={`${errors.emailErr !== "" || errors.usernameErr !== ""
-                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
-                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
-                >
-                    <div className={`${errors.usernameErr !== ""
+                    <div className={`${state.usernameErr !== ""
                         ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
                         : "hidden"
                         }`}>
                         <p className="text-red-600 scale-150"><BiErrorCircle /></p>
-                        <p className="">{errors.usernameErr}</p>
+                        <p className="">{state.usernameErr}</p>
                     </div>
-                    <div className={`${errors.emailErr !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] text-center w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
+                </div>
+
+                <div className={`${registered !== ""
+                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
+                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
+                >
+                    <div className={`${registered !== ""
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
                         : "hidden"
                         }`}>
-                        <p className="text-red-600 scale-150"><BiErrorCircle /></p>
-                        <p className="">{errors.emailErr}</p>
+                        <p className="text-blue-600 scale-150"><BiNotification /></p>
+                        <p className="">{registered}</p>
+                    </div>
+                </div>
+
+                <div className={`${state.existingUser !== ""
+                    ? "flex flex-col justify-center items-center duration-500 translate-x-0"
+                    : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
+                >
+                    <div className={`${state.existingUser !== ""
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
+                        : "hidden"
+                        }`}>
+                        <p className="text-blue-600 scale-150"><BiErrorCircle /></p>
+                        <p className="">{state.existingUser}</p>
                     </div>
                 </div>
 
@@ -91,55 +119,55 @@ export function Register({ setRegister, setLogin }) {
                     <div className="">
                         <label htmlFor="username" className="dark:text-white">Userame</label>
                         <input
-
+                            required
                             type="text"
                             name="username"
                             id="username"
                             value={userDetails.username}
                             onChange={(e) => {
-                                userDetails.username !== "" && setErrors({ ...errors, Err_emptyInput: "", usernameErr: "", emailErr: "" })
+                                userDetails.username !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
                                 setUserDetails({ ...userDetails, username: e.target.value })
                             }}
-                            className="w-full focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm py-2 outline-none pl-2 
+                            className="w-full focus:border-blue-600 duration-100 focus:shadow-blue-600 focus:shadow-sm py-2 outline-none pl-2 
                             dark:border-white border-gray-600 rounded-lg dark:text-white bg-transparent border"
                         />
                     </div>
                     <div className="">
                         <label htmlFor="email" className="dark:text-white">E-mail</label>
                         <input
-                            // required
+                            required
                             type="text"
                             name="email"
                             id="email"
                             value={userDetails.email}
                             onChange={(e) => {
-                                userDetails.email !== "" && setErrors({ ...errors, Err_emptyInput: "", usernameErr: "", emailErr: "" })
+                                userDetails.email !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
                                 setUserDetails({ ...userDetails, email: e.target.value })
                             }}
                             className="w-full py-2 outline-none pl-2 dark:border-white border-gray-600 
-                            dark:text-white bg-transparent border rounded-lg focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
+                            dark:text-white bg-transparent border rounded-lg duration-100 focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
                         />
                     </div>
                     <div className="">
                         <label htmlFor="password" className="dark:text-white">Passoword</label>
                         <input
-                            // required
+                            required
                             type="text"
                             name="password"
                             id="password"
                             value={userDetails.password}
                             onChange={(e) => {
-                                userDetails.password !== "" && setErrors({ ...errors, Err_emptyInput: "", usernameErr: "", emailErr: "" })
+                                userDetails.password !== "" && setState({ ...state, existingUser: "", usernameErr: "", registered: "" })
                                 setUserDetails({ ...userDetails, password: e.target.value })
                             }}
-                            className="w-full py-2 outline-none pl-2 dark:border-white border-gray-600 
+                            className="w-full py-2 outline-none pl-2 dark:border-white duration-100 border-gray-600 
                             dark:text-white bg-transparent border rounded-lg focus:border-blue-600 focus:shadow-blue-600 focus:shadow-sm"
                         />
                     </div>
                     <div className="">
                         <label htmlFor="profile_image" className="dark:text-white">Upload Profile Picture</label>
                         <input
-                            // required
+                            required
                             onChange={(e) => setProfile_image(e.target.files[0])}
                             name="profile_image"
                             id="profile_image"
@@ -150,7 +178,7 @@ export function Register({ setRegister, setLogin }) {
                     </div>
 
                     <p className="">
-                        <span>Already have an account? </span>
+                        <span className="dark:text-white">Already have an account? </span>
                         <span
                             onClick={() => { setRegister(false); setLogin(true) }}
                             role="button"
@@ -168,7 +196,6 @@ export function Register({ setRegister, setLogin }) {
                     </button>
 
                     <button
-                        role="button"
                         onClick={() => setRegister(false)}
                         className="uppercase rounded-lg w-full py-2 bg-gray-400 flex justify-center items-center dark:text-white text-white">
                         <span>Cancel</span>

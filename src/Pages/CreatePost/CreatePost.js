@@ -1,9 +1,49 @@
-import React from 'react'
+import axios from "axios"
+import { useEffect } from "react";
+import { useState } from "react";
 
 export function CreatePost() {
+    const userID = JSON.parse(sessionStorage.getItem("userID"));
+    const [user, setUser] = useState({});
+    const getUserDetails = async () => {
+        await axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`)
+            .then(res => {
+                const data = res.data
+                setUser(data)
+                console.log(data);
+            });
+    };
+
+    useEffect(() => {
+        getUserDetails()
+        // eslint-disable-next-line
+    }, [userID])
+
+    const postVideo = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const entries = Object.fromEntries(formData.entries());
+
+        formData.append("username", user.username);
+        formData.append("photo", user.profile_Image);
+        formData.append("userID", user.id);
+
+        console.log(entries);
+
+        await axios.post(`http://localhost:9000/uplay/videos`, formData)
+            .then(res => {
+                const data = res.data;
+                console.log(data);
+                setTimeout(() => {
+                    window.location.reload()
+                }, 500)
+            })
+    };
+
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] xl:pl-[4rem] md:pl-[8%] lg:pl-[6%] bg-black bg-opacity-40 h-screen w-full">
-            <div className="lg:w-[50%] md:w-[50%] w-[100%] flex flex-col gap-6 bg-slate-100 h-full md:border-r p-2 
+            <form onSubmit={postVideo} className="lg:w-[50%] md:w-[50%] w-[100%] flex flex-col gap-6 bg-slate-100 h-full md:border-r p-2 
             dark:bg-gray-700 dark:text-white">
                 <div className="">
                     <label htmlFor="title" className="text-[19px]">Title</label>
@@ -36,11 +76,11 @@ export function CreatePost() {
                 </div>
 
                 <div className="">
-                    <button className="bg-blue-700 py-2 w-full text-white uppercase">
+                    <button type="submit" className="bg-blue-700 py-2 w-full text-white uppercase">
                         Upload
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
