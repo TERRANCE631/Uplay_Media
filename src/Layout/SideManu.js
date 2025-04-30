@@ -1,4 +1,3 @@
-import { BiLayout } from "react-icons/bi";
 import { manuList } from "./components/ManuList";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../Hooks/Context/useContext";
@@ -26,24 +25,12 @@ export function SideManu({ setShowCreatePost }) {
       </div>
       <div className="border-b my-4 border-gray-500 dark:border-white" />
 
-      <Link
-        to="/Home/User/profile/"
-        role="button"
-        className="hover:text-white"
-      >
-        <p className="truncate my-2 border hover:bg-gray-500 bg-gray-500/10 rounded-lg py-2 flex 
-        flex-col justify-center items-center">
-          <BiLayout className="scale-150" />
-        </p>
-      </Link>
-      <div className="border-b my-4 border-gray-500 dark:border-white" />
-
       <div className="flex flex-col justify-center items-center overflow-y-hidden">
         {subs.filter(item => item.userID === userID).map((sub, i) => {
           return (
-            <button className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-0.5">
+            <Link to={`/Home/User/profile/${sub.videoUserID}`} className="md:h-10 md:w-10 w-9 h-9 rounded-full border hover:opacity-70 flex flex-col my-0.5">
               <img src={sub.profile_photo || "/Assets/profile.png"} alt="" className="object-cover bg-white object-center h-full w-full rounded-full" />
-            </button>
+            </Link>
           )
         })}
       </div>

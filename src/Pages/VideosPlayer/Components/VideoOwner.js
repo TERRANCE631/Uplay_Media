@@ -76,7 +76,7 @@ export function VideoOwner({ username, photo, title, id, videoDetails }) {
         <section className="truncate flex justify-between items-center 
             rounded-lg my-2 gap-1">
           <div className="truncate flex items-center gap-1">
-            <Link to="/" className="md:h-10 md:w-10 bg-white w-10 h-10 rounded-full border 
+            <Link to={`/Home/User/profile/${videoDetails.userID}`} className="md:h-10 md:w-10 bg-white w-10 h-10 rounded-full border 
             hover:opacity-70 flex my-2">
               <img
                 src={photo || "/Assets/profile.png"}

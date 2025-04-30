@@ -1,12 +1,11 @@
-import React from 'react'
-import users from "../../../MOCK_DATA.json";
+import { Link } from "react-router-dom"
 
-export function VideoList({ userID, videoList }) {
+export function VideoList({ user, videoList }) {
     return (
-        <div className="grid h-full w-full 2xl:grid-cols-8 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 py-2 gap-5">
-            {videoList.filter((prev) => prev.userID === userID).map((vid, i) => {
+        <div className="grid h-full w-full 2xl:grid-cols-8 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 md:mx-2 py-2 gap-5">
+            {videoList.filter((prev) => prev.userID === user.id).map((vid, i) => {
                 return (
-                    <div key={i} className="border border-dotted w-full bg-slate-200/20 shadow-lg">
+                    <Link to={`/videoPlayer/${vid.id}`} key={i} className="border border-dotted w-full bg-slate-200/20 shadow-lg">
                         <div className="border border-dotted h-[12rem] w-full">
                             <video
                                 src={vid.video}
@@ -24,7 +23,7 @@ export function VideoList({ userID, videoList }) {
                                 <p className="text-xs">{vid.date}</p>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 )
             })}
         </div>

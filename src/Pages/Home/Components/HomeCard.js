@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CardDropDown } from './CardDropDown';
+// import { CardDropDown } from './CardDropDown';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 
 export function HomeCard({ video }) {
-    const [showDropDown, setShowDropDown] = useState(false);
-    const [videoID, setVideoID] = useState(null);
+    // const [showDropDown, setShowDropDown] = useState(false);
+    // const [videoID, setVideoID] = useState(null);
     const { likes, Likes } = GlobalContext();
 
     const [hover, setHover] = useState(null);
@@ -20,7 +20,7 @@ export function HomeCard({ video }) {
     return (
         <section className="h-full">
             <div className="h-full w-full flex flex-col mb-4 bg-white 
-            dark:bg-gray-600 shadow-lg border-b border-black md:border-none">
+            dark:bg-gray-600 shadow-lg shadow-black border-b border-black md:border-2 border-dotted rounded-lg border-white/20 ">
                 {!hover &&
                     <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
                         <video
@@ -29,7 +29,7 @@ export function HomeCard({ video }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            className="h-[10rem] bg-white w-full object-cover object-center"
+                            className="h-[10rem] mask rounded-t-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
                 {hover &&
@@ -42,7 +42,7 @@ export function HomeCard({ video }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            className="h-[10rem] bg-white w-full object-cover object-center"
+                            className="h-[10rem] bg-white w-full object-cover object-center rounded-t-lg"
                         />
                     </Link>}
 
@@ -66,7 +66,7 @@ export function HomeCard({ video }) {
                 </section>
 
                 <section className="flex p-1 h-full items-center justify-between">
-                    <Link to="/"
+                    <Link to={`/Home/User/profile/${video.userID}`}
                         className="flex items-center mt-2 -mb-2 gap-1"
                     >
                         <div className="w-9 h-9 rounded-full border">
@@ -84,7 +84,7 @@ export function HomeCard({ video }) {
                         </div>
                     </Link>
 
-                    <button
+                    {/* <button
                         onClick={() => { setShowDropDown((prev) => !prev); setVideoID(video.id) }}
                         className="bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-800/70 hover:bg-gray-100 py-2 rounded-full"
                     >
@@ -96,8 +96,8 @@ export function HomeCard({ video }) {
                                 )
                             })}
                         </div>
-                    </button>
-                    {video.id === videoID && showDropDown && <CardDropDown />}
+                    </button> */}
+                    {/* {video.id === videoID && showDropDown && <CardDropDown />} */}
                 </section>
             </div>
         </section >

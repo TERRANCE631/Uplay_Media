@@ -1,8 +1,5 @@
-import React from 'react'
-import { BiLayout } from 'react-icons/bi'
 import { slideList } from './components/SlideList'
 import { Link } from 'react-router-dom'
-import { subsList } from './components/SubsList'
 import { GlobalContext } from '../Hooks/Context/useContext'
 
 export function SlideIn({ setShowManu, setShowCreatePost }) {
@@ -53,36 +50,25 @@ export function SlideIn({ setShowManu, setShowCreatePost }) {
                             })}
                         </div>
                         <div className="border-b my-4 border-gray-500 dark:border-white" />
-
-                        <Link
-                            onClick={() => setShowManu(false)}
-                            to="/Home/User/profile/"
-                            role="button"
-                            className="md:text-md"
-                        >
-                            <p className="truncate my-2 border bg-gray-500/20 hover:bg-gray-500/10 
-                            rounded-lg py-2 flex flex-col justify-center items-center">
-                                <BiLayout className="scale-150" />
-                                <p className="mt-0.5 md:text-[0.9rem] text-xs">
-                                    My videos
-                                </p>
-                            </p>
-                        </Link>
                     </div>
-                    <div className="border-b my-4 border-gray-500 dark:border-white" />
 
                     <p className="text-sm">Subscribtions</p>
                     <div role="button" className="">
                         {subs.filter(item => item.userID === userID).map((sub, i) => {
                             return (
-                                <section key={i} className="bg-gray-500/20 truncate hover:bg-gray-500/10 flex items-center 
-                                rounded-lg my-2 px-2 gap-1">
+                                <Link
+                                    onClick={() => setShowManu(false)}
+                                    to={`/Home/User/profile/${sub.videoUserID}`}
+                                    key={i}
+                                    className="bg-gray-500/20 truncate hover:bg-gray-500/10 flex items-center 
+                                    rounded-lg my-2 px-2 gap-1"
+                                >
                                     <button className="md:h-8 md:w-8 bg-white w-8 h-8 rounded-full border 
                                 hover:opacity-70 flex flex-col my-2">
                                         <img src={sub.profile_photo || "/Assets/profile.png"} alt="" className="object-cover object-center h-full w-full rounded-full" />
                                     </button>
                                     <p className="truncate">{sub.sub__To}</p>
-                                </section>
+                                </Link>
                             )
                         })}
                     </div>

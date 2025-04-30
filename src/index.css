@@ -104,3 +104,8 @@ body {
     transform: translateY(-0px);
   }
 }
+
+.mask {
+  /* mask for image effect */
+  mask: linear-gradient(0deg, transparent, gray 10%);
+}

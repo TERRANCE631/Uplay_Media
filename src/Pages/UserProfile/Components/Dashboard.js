@@ -15,13 +15,14 @@ export const dashboardList = [
     }
 ]
 
-export const stats = [
-    {
-        title: "Likes",
-        Likes: 3000
-    },
+export const data = [
     {
         title: "Subscribers",
-        Subscribers: 2000,
+        count: 2000,
+    },
+    {
+        title: "Likes",
+        count: 3000
     }
-]
+];
+
