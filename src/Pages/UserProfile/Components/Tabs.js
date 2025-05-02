@@ -11,13 +11,15 @@ export function Tabs({ NavBar, onClick }) {
 
     return (
         <div className="" >
-            <div className="flex gap-5">
+            <div className="flex">
                 {NavBar.map((tab, i) => {
                     return (
                         <button
                             key={tab.title}
                             onClick={() => getIndex(i)}
-                            className={currentIndex === i ? "bg-slate-200 dark:bg-gray-800 rounded-t-lg py-2 px-6" : "py-2 px-6"}
+                            className={currentIndex === i
+                                ? "bg-slate-200 border dark:border-gray-800 dark:bg-gray-800 py-2 px-6"
+                                : "border dark:border-gray-800 py-2 px-6"}
                         >
                             <div className="">
                                 {tab.title}
@@ -26,7 +28,7 @@ export function Tabs({ NavBar, onClick }) {
                     )
                 })}
             </div>
-            <div className="flex flex-col bg-slate-200 dark:bg-gray-800 h-full pb-10">
+            <div className="flex flex-col h-screen bg-slate-200 dark:bg-gray-800 ">
                 {NavBar[currentIndex] && NavBar[currentIndex].content}
             </div>
         </div>

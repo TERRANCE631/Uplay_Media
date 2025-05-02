@@ -14,7 +14,7 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
         formData.append("profile_photo", photo);
         formData.append("sub__To", username);
 
-        axios.post("http://localhost:9000/uplay/postSubs", formData)
+        axios.post(`${process.env.REACT_APP_API_URL}/uplay/postSubs`, formData)
             .then(res => {
                 const data = res.data;
                 console.log(data);
@@ -22,7 +22,7 @@ export function SubscribeFn(id, userID, subs, GetSubscribers, videoDetails, user
     };
 
     const DeleteSub = (userID) => {
-        axios.delete(`http://localhost:9000/uplay/deleteSub/${userID}`);
+        axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deleteSub/${userID}`);
     };
 
     useEffect(() => {

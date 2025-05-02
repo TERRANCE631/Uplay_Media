@@ -9,9 +9,27 @@ export function GlobalState({ children }) {
     const [profileDetails, setProfileDetails] = useState()
     const [value, setValue] = useState("");
     const [subs, setSubs] = useState([]);
+    const [showLogin, setLogin] = useState(false);
+    const [Loading, setLoading] = useState(false);
+    const [videos, setVideos] = useState([]);
+
+    const getVideos = async () => {
+        try {
+            setLoading(true)
+            await axios.get(`${process.env.REACT_APP_API_URL}/uplay/getVideos`)
+                .then(res => {
+                    const data = res.data;
+                    setLoading(false)
+                    setVideos(data);
+                })
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
 
     function getUser() {
-        axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`, {
+        axios.get(`${process.env.REACT_APP_API_URL}/uplay/GetUseId/${userID}`, {
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         })
             .then(res => {
@@ -26,7 +44,7 @@ export function GlobalState({ children }) {
     }, [token, userID]);
 
     const GetSubscribers = () => {
-        axios.get("http://localhost:9000/uplay/getSubs")
+        axios.get(`${process.env.REACT_APP_API_URL}/uplay/getSubs`)
             .then(res => {
                 const data = res.data;
                 setSubs(data);
@@ -46,7 +64,15 @@ export function GlobalState({ children }) {
         subs,
         setSubs,
         scrollIntoView,
+        showLogin,
+        setLogin,
+        Loading,
+        setLoading,
+        getVideos,
+        videos,
+        setVideos
     };
+
     return (
         <ContextWrapper.Provider value={values}>
             {children}

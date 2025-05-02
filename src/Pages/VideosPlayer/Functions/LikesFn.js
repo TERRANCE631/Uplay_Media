@@ -16,7 +16,7 @@ export function LikesFn(id) {
 
     // getting current user details
     const getUserDetails = async () => {
-        await axios.get(`http://localhost:9000/uplay/GetUseId/${userID}`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/GetUseId/${userID}`)
             .then(res => {
                 const data = res.data
                 setUser(data)
@@ -30,7 +30,7 @@ export function LikesFn(id) {
     // end of getting current user datails
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:9000/uplay/deletelike/${id}`)
+        await axios.delete(`${process.env.REACT_APP_API_URL}/uplay/deletelike/${id}`)
     };
 
     // posting likes, username, videoID and id as primary key
@@ -41,11 +41,11 @@ export function LikesFn(id) {
         formData.append("userID", userID);
         formData.append("videoID", id);
 
-        axios.post(`http://localhost:9000/uplay/likes`, formData)
+        axios.post(`${process.env.REACT_APP_API_URL}/uplay/likes`, formData)
     };
 
     const getLikes = async () => {
-        await axios.get(`http://localhost:9000/uplay/getLikes`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/getLikes`)
             .then(res => {
                 const data = res.data;
                 setLike(data);

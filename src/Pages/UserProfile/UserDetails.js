@@ -9,10 +9,10 @@ export function UserDetails() {
     const [user, setUser] = useState({});
     const [videoList, setVideoList] = useState([]);
     const { id } = useParams();
-
+    
     // getting current user details
     const getUsersById = async () => {
-        await axios.get(`http://localhost:9000/uplay/userprofile/${id}`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/uplay/userprofile/${id}`)
             .then(res => {
                 const data = res.data
                 setUser(data)
@@ -26,7 +26,7 @@ export function UserDetails() {
     // end of getting current user datails
 
     const getVideos = () => {
-        axios.get(`http://localhost:9000/uplay/getVideos`)
+        axios.get(`${process.env.REACT_APP_API_URL}/uplay/getVideos`)
             .then(res => {
                 const data = res.data;
                 setVideoList(data);
@@ -47,7 +47,7 @@ export function UserDetails() {
                         <UserInfor user={user} videoLenght={videoLenght} />
                     </div>
                     <div className="md:pt-[6rem] pt-[4rem]">
-                        <TabList videoList={videoList} user={user} dashboardList={dashboardList} />
+                        <TabList videoList={videoList} getVideos={getVideos} user={user} dashboardList={dashboardList} />
                     </div>
                 </div>
             </div>

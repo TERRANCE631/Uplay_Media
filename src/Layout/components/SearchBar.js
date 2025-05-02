@@ -1,12 +1,27 @@
 import { BiSearch } from "react-icons/bi";
 import { GlobalContext } from "../../Hooks/Context/useContext";
-import { videos } from "../../Pages/Home/Components/VideoList";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export function SearchBar() {
     const { setValue, value } = GlobalContext();
+    const [videos, setVideos] = useState([])
 
-    const filter = videos.filter((item) => { return item.title.toLowerCase().includes(value.toLowerCase()) })
+    const getVideos = async () => {
+        await axios.get("http://localhost:9000/uplay/getVideos?_sort=id&&_order=dis")
+            .then(res => {
+                const data = res.data;
+                setVideos(data);
+            })
+    };
+
+    useEffect(() => {
+        getVideos();
+    }, []);
+
+    const filter = videos.filter((item) => { return item.title.toLowerCase().match(value.toLowerCase()) });
+
     return (
         <section className="md:flex items-center hidden w-full mx-4">
             <input
@@ -31,19 +46,21 @@ export function SearchBar() {
                 <BiSearch />
             </button>
             {value !== "" && filter.length !== 0 &&
-                <Link
-                    to="/Home/search results/"
+                <div
                     onClick={() => setValue("")}
                     className="flex ml-10 justify-center items-center backdrop- inset-x-0 top-[4.5rem] ite min-h-20 absolute"
                 >
                     <section className="w-[80%] flex flex-col p-2 rounded-lg dark:bg-gray-600 truncate bg-slate-200 shadow-black shadow-lg" >
                         {filter.slice(0, 8).map((name, i) => {
                             return (
-                                <p className="border-gray-400 shadow-lg truncate rounded-lg border p-2 my-0.5">{name.title}</p>
+                                <Link key={i} to={`/videoPlayer/${name.id}`}
+                                    className="border-gray-400 shadow-lg truncate rounded-lg border p-2 my-0.5">
+                                    {name.title}
+                                </Link>
                             )
                         })}
                     </section>
-                </Link>}
+                </div>}
         </section>
     )
 }

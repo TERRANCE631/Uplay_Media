@@ -1,40 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { SideVideos } from './Components/SideVideos';
 import { VideoOwner } from './Components/VideoOwner';
 import { Comments } from './Components/Comments';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { VideoPlayerFn } from './Functions/VideoPlayerFn';
 
 export function VideoPlayer() {
-    const [videoDetails, setVideoDetails] = useState({});
-    const [videoList, setVideoList] = useState([]);
-    const [toggle, setToggle] = useState(true);
     const { id } = useParams();
-    const scrollRef = useRef(null);
-
-
-    const getVideoByID = () => {
-        axios.get(`http://localhost:9000/uplay/VideoPlayer/${id}`)
-            .then(res => {
-                const data = res.data;
-                setVideoDetails(data);
-            });
-    };
-
-    const getVideos = () => {
-        axios.get(`http://localhost:9000/uplay/getVideos`)
-            .then(res => {
-                const data = res.data;
-                setVideoList(data);
-            });
-    };
-
-    const { username, video, likes, downloads, clicks, photo, title } = videoDetails
-    useEffect(() => {
-        getVideos();
-        getVideoByID();
-        // eslint-disable-next-line 
-    }, [id]);
+    const {
+        videoDetails,
+        scrollRef,
+        videoList,
+        getVideos,
+        username,
+        video,
+        likes,
+        downloads,
+        clicks,
+        photo,
+        title,
+        toggle,
+        setToggle
+    } = VideoPlayerFn(id);
 
     return (
         <section ref={scrollRef}>

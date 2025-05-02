@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiDownload, BiLike } from 'react-icons/bi'
+import { BiLike } from 'react-icons/bi'
 
 export function Dropdown({ setShowDropDown, showDropDown }) {
     return (

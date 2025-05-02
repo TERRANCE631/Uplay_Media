@@ -40,14 +40,41 @@ body {
   }
 }
 
-@layer tailwind {
-  .floating__header_lightMode {
-    @apply bg-slate-100 backdrop-blur-2xl
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.906), rgb(17, 0, 253), rgba(255, 255, 255, 0.906));
   }
 
-  .floating__header_darkMode {
-    @apply dark:bg-gray-900 backdrop-blur-2xl
+  50% {
+    transform: translateX(80%);
+    width: 60%;
+    background-image: linear-gradient(rgba(25, 0, 255, 0.45), rgba(17, 0, 253, 0.45), rgba(255, 255, 255, 0.906));
   }
+
+  60% {
+    transform: translateX(40%);
+    background-image: linear-gradient(rgba(255, 0, 0, 0.906), rgb(255, 0, 0), rgba(255, 255, 255, 0.906));
+    width: 50%;
+  }
+
+  100% {
+    transform: translateX(250%);
+    background-image: linear-gradient(rgba(25, 0, 255, 0.45), rgba(25, 0, 255, 0.45), rgba(255, 255, 255, 0.906));
+  }
+}
+
+.animate-loading-bar {
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(13, 0, 255, 0.45), rgba(255, 255, 255, 0));
+  animation: loading 1.7s ease infinite;
+}
+
+.floating__header_lightMode {
+  @apply bg-slate-100 backdrop-blur-2xl
+}
+
+.floating__header_darkMode {
+  @apply dark:bg-gray-900 backdrop-blur-2xl
 }
 
 @layer MobileScreens {
@@ -71,12 +98,10 @@ body {
   }
 }
 
-.upload__btn {
-  ::-webkit-file-upload-button {
-    background-color: transparent;
-    border: none;
-    opacity: 0;
-  }
+.upload__btn ::-webkit-file-upload-button {
+  background-color: transparent;
+  border: none;
+  opacity: 0;
 }
 
 .indicator-line {

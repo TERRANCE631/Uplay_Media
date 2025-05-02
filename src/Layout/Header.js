@@ -1,55 +1,24 @@
-import { useEffect, useRef, useState } from "react";
 import { BiMoon, BiSearch, BiSun } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useWindowScroll } from "react-use";
 import { SearchBar } from "./components/SearchBar";
 import { MobileSearchBar } from "./components/MobileSearchBar";
 import ProfileDropdownLoggedOut from "./ProfileDropdownLoggedOut";
-import { GlobalContext } from "../Hooks/Context/useContext";
 import { ProfileDropdown } from "./ProfileDropdown";
+import { HeaderFn } from "./Functions/HeaderFn";
 
 export function Header({ setShowManu, setLogin, setRegister }) {
-  const [showSearch, setShowSearch] = useState(false);
-  const [showProfile, setProfile] = useState(false);
-  const { setValue, profileDetails } = GlobalContext()
-  const token = JSON.parse(sessionStorage.getItem("userToken"));
-
-  const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
-  const { y: currentScrollY } = useWindowScroll();
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-
-  useEffect(() => {
-    const element = scrollRef.current
-
-    if (currentScrollY > 0 && !darkMode) {
-      element.classList.add("floating__header_lightMode")
-      setProfile(false);
-      setShowSearch(false);
-      setValue("")
-
-    } else if (currentScrollY === 0 && !darkMode) {
-      element.classList.remove("floating__header_lightMode")
-    } else if (currentScrollY > 0 && darkMode) {
-      element.classList.add("floating__header_darkMode")
-      setProfile(false);
-      setShowSearch(false);
-      setValue("")
-
-    } else if (currentScrollY === 0 && darkMode) {
-      element.classList.remove("floating__header_darkMode")
-    };
-    // eslint-disable-next-line 
-  }, [currentScrollY, darkMode]);
+  const { currentScrollY,
+    darkMode,
+    showProfile,
+    profileDetails,
+    showSearch,
+    token,
+    setDarkMode,
+    Loading,
+    setShowSearch,
+    setProfile,
+    scrollRef
+  } = HeaderFn();
 
   return (
     <header className="fixed z-50">
@@ -98,12 +67,18 @@ export function Header({ setShowManu, setLogin, setRegister }) {
           </button>
         </section>
       </nav>
+      {
+        Loading &&
+        <div className="w-full h-[3.4px] rounded-full bg-red-200 absolute z-50 overflow-hidden">
+          <div className="md:w-[45%] w-[100%] rounded-full h-full shadow-xl transition-transform duration-500 animate-loading-bar"></div>
+        </div>
+      }
 
-
-      {!token && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
-      {token && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
+      {!Loading && !token && showProfile && <ProfileDropdownLoggedOut setLogin={setLogin} setRegister={setRegister} setProfile={setProfile} />}
+      {!Loading && token && showProfile && <ProfileDropdown profileDetails={profileDetails} setProfile={setProfile} />}
 
       <MobileSearchBar currentScrollY={currentScrollY} showSearch={showSearch} />
+
     </header>
   )
 }

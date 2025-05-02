@@ -1,58 +1,8 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 import { BiErrorCircle, BiLogInCircle, BiNotification, BiUndo } from 'react-icons/bi';
-import { GlobalContext } from '../../Hooks/Context/useContext';
-import { useNavigate } from 'react-router-dom';
+import { LogInFn } from './Functions/LogInFn';
 
 export function LogIn({ setRegister, setLogin }) {
-    const [userToken, setToken] = useState(JSON.parse(sessionStorage.getItem("userToken")) || "");
-    const [ID, setID] = useState(JSON.parse(localStorage.getItem("userID")) || 0);
-    const { getUser } = GlobalContext()
-    const navigate = useNavigate()
-
-    const [err, setErr] = useState({
-        error: "",
-        loggedIn: "",
-    });
-
-    useEffect(() => {
-        sessionStorage.setItem("userToken", JSON.stringify(userToken));
-        sessionStorage.setItem("userID", JSON.stringify(ID));
-        // eslint-disable-next-line
-    }, [userToken]);
-
-    setTimeout(() => {
-        sessionStorage.removeItem("userToken");
-        sessionStorage.removeItem("userID");
-    }, 1000 * 60 * 60)
-
-    setTimeout(() => {
-        setErr({ ...err, loggedIn: "", error: "" })
-    }, 1000 * 10)
-
-    const UserInputs = (e) => {
-        getUser();
-        const formData = new FormData(e.target);
-        e.preventDefault();
-
-        try {
-            axios.post("http://localhost:9000/uplay/signIn", formData)
-                .then(res => {
-                    const data = res.data;
-                    setErr({ ...err, loggedIn: data.loggedIn })
-                    data.token === undefined
-                        ? setErr({ ...err, error: data.error })
-                        : setToken(data.token) || setID(data.id);
-                    setTimeout(() => {
-                        window.location.reload()
-                        navigate("/")
-                    }, 500);
-                });
-            e.target.reset();
-        } catch (error) {
-            throw new Error(error);
-        }
-    };
+    const { UserInputs, err } = LogInFn(setLogin);
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-40 h-screen w-full">

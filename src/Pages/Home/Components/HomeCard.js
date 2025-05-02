@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { CardDropDown } from './CardDropDown';
 import { GlobalContext } from '../../../Hooks/Context/useContext';
 
-export function HomeCard({ video }) {
+export function HomeCard({ video, TokenCondition }) {
     // const [showDropDown, setShowDropDown] = useState(false);
     // const [videoID, setVideoID] = useState(null);
     const { likes, Likes } = GlobalContext();
@@ -15,12 +15,12 @@ export function HomeCard({ video }) {
 
     const onMouseLeave = () => {
         setHover(null)
-    }
+    };
 
     return (
         <section className="h-full">
             <div className="h-full w-full flex flex-col mb-4 bg-white 
-            dark:bg-gray-600 shadow-lg shadow-black border-b border-black md:border-2 border-dotted rounded-lg border-white/20 ">
+            dark:bg-gray-600 shadow-lg shadow-black border-b border-black md:border-2 border-dotted md:rounded-lg border-white/20 ">
                 {!hover &&
                     <Link to={`/videoPlayer/${video.id}`} onMouseEnter={onHover} onClick={() => Likes(likes)} className="">
                         <video
@@ -29,7 +29,7 @@ export function HomeCard({ video }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            className="h-[10rem] mask rounded-t-lg bg-white w-full object-cover object-center"
+                            className="h-[10rem] mask md:rounded-t-lg bg-white w-full object-cover object-center"
                         />
                     </Link>}
                 {hover &&
@@ -42,12 +42,13 @@ export function HomeCard({ video }) {
                                 e.target.src = "/Assets/feature-5.mp4"
                             }}
                             alt=""
-                            className="h-[10rem] bg-white w-full object-cover object-center rounded-t-lg"
+                            onClick={TokenCondition}
+                            className="h-[10rem] bg-white w-full object-cover object-center md:rounded-t-lg"
                         />
                     </Link>}
 
                 <section className="flex p-1 h-full">
-                    <Link to="/videoPlayer" className="flex flex-wrap truncate">
+                    <Link to={`/videoPlayer/${video.id}`} className="flex flex-wrap truncate">
                         {video.title.split(" ").map((title, i) => {
                             return (
                                 <section onClick={() => Likes(likes)} key={i} className='flex items-center truncate'>
@@ -67,7 +68,7 @@ export function HomeCard({ video }) {
 
                 <section className="flex p-1 h-full items-center justify-between">
                     <Link to={`/Home/User/profile/${video.userID}`}
-                        className="flex items-center mt-2 -mb-2 gap-1"
+                        className="flex items-center mt-2 md:-mb-2 gap-1"
                     >
                         <div className="w-9 h-9 rounded-full border">
                             <img src={video.photo || "/Assets/profile.png"} alt="" className="object-cover bg-white rounded-full object-center 

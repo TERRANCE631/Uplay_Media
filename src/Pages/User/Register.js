@@ -1,73 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import { BiErrorCircle, BiNotification, BiUndo, BiUserPlus } from 'react-icons/bi';
-import axios from 'axios';
+import { RegisterFn } from './Functions/RegisterFn';
 
 export function Register({ setRegister, setLogin }) {
-    const [profile_image, setProfile_image] = useState(null);
-    const [registered, setRegistered] = useState("");
-
-    const [state, setState] = useState({
-        usernameErr: "",
-        registered: "",
-        presentUsername: 0,
-        existingUser: ""
-    });
-
-    const [userDetails, setUserDetails] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
-    const { username, email } = userDetails;
-
-    setTimeout(() => {
-        setRegistered("")
-    }, 1000 * 10);
-
-    useEffect(() => {
-        axios.get("http://localhost:9000/uplay/getUsername")
-            .then(res => {
-                const data = res.data;
-                const filter = data.filter((item) => item.username.includes(userDetails.username));
-                setState({ ...state, presentUsername: filter.length });
-            });
-        // eslint-disable-next-line
-    }, [userDetails.username]);
-
-    const UserInputs = (e) => {
-        e.preventDefault()
-        if (username && !username.match(/[A-Za-z0-9.@]/) && email && !email.match(/[A-Za-z0-9.@]/))
-            return setState({ ...state, usernameErr: "Username / Email can only have A-Z a-z 0-9 . @ / latters and numbers." });
-
-        if (state.presentUsername > 0) {
-            setState({ ...state, existingUser: "Username already exist, try another username" })
-        }
-
-        const users = new FormData();
-
-        users.append("username", userDetails.username);
-        users.append("email", userDetails.email);
-        users.append("password", userDetails.password);
-        users.append("image", profile_image);
-
-        try {
-            if (state.usernameErr === "" && !state.presentUsername > 0) {
-                axios.post("http://localhost:9000/uplay/register", users)
-                    .then(res => {
-                        const data = res.data
-                        setRegistered(data.registered);
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 500);
-                    })
-                    .catch(error => console.log(error));
-            }
-        } catch (error) {
-            console.log(error);
-        }
-
-        setUserDetails({ ...userDetails, username: "", email: "", password: "" })
-    };
+    const {
+        setProfile_image,
+        registered,
+        state,
+        setState,
+        UserInputs,
+        userDetails,
+        setUserDetails
+    } = RegisterFn(setRegister, setLogin);
 
     return (
         <div className="flex flex-col fixed z-20 mt-[4.5rem] bg-black bg-opacity-40 h-screen w-full">
@@ -81,7 +24,7 @@ export function Register({ setRegister, setLogin }) {
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
                     <div className={`${state.usernameErr !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-black"
                         : "hidden"
                         }`}>
                         <p className="text-red-600 scale-150"><BiErrorCircle /></p>
@@ -94,7 +37,7 @@ export function Register({ setRegister, setLogin }) {
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
                     <div className={`${registered !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-20 items-center rounded-lg border border-gray-600 dark:text-black"
                         : "hidden"
                         }`}>
                         <p className="text-blue-600 scale-150"><BiNotification /></p>
@@ -107,7 +50,7 @@ export function Register({ setRegister, setLogin }) {
                     : "flex flex-col justify-center items-center duration-500 translate-x-[120%]"}`}
                 >
                     <div className={`${state.existingUser !== ""
-                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 items-center rounded-lg border border-gray-600 dark:text-white"
+                        ? "bg-slate-300 gap-1 md:w-[90%] px-2 w-full text-sm flex absolute py-1 z-10 items-center rounded-lg border border-gray-600 dark:text-black"
                         : "hidden"
                         }`}>
                         <p className="text-blue-600 scale-150"><BiErrorCircle /></p>

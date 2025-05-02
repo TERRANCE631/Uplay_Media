@@ -10,7 +10,7 @@ import { data } from './Dashboard';
 
 export function AnaliticGraph() {
     return (
-        <div className="reletive h-[400px] mt-2 pt-4 md:w-full flex justify-center border items-center rounded-lg">
+        <div className="reletive h-screen my-2 pt-4 md:w-full flex justify-center border items-center">
             <ResponsiveContainer>
                 <BarChart data={data}>
                     <XAxis dataKey="title" />

@@ -5,13 +5,15 @@ import { AllRoutes } from "./Routes/AllRoutes";
 import { CreatePost } from "./Pages";
 import { Register } from "./Pages/User/Register";
 import { LogIn } from "./Pages/User/LogIn";
+import { GlobalContext } from "./Hooks/Context/useContext";
 
 function App() {
+  const { showLogin, setLogin } = GlobalContext();
+
   const [showRegister, setRegister] = useState(false);
-  const [showLogin, setLogin] = useState(false);
   const [showManu, setShowManu] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
-  
+
   return (
     <div className="dark:bg-gray-700 min-h-screen overflow-hidden">
       <Header setShowManu={setShowManu} setLogin={setLogin} setRegister={setRegister} />

@@ -2,6 +2,9 @@
 
 - React.js
 - Tailwind CSS
+- CSS
+- Node.js
+- MySQL
 
 ## <a name="quick-start">🤸 Quick Start The Project</a>
 
@@ -11,7 +14,7 @@ Follow these steps to set up the project locally on your machine.
 
 Make sure you have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/en)
+- [Node.js, XAMPP control punel]
 
 **Installation**
 
@@ -21,10 +24,19 @@ Install the project dependencies using npm:
 npm install || npm i
 ```
 
-**Running the Project**
+**Running the Frontend**
 
 ```bash
 npm start
 ```
+**Running the Server**
+
+```bash
+npm run server
+```
+
+**Running Database on local machine**
+
+- Open 👉👉"XAMPP control punel", start 👉"Apache" and 👉"MySQL" modules.
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
