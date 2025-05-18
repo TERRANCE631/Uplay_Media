@@ -110,7 +110,6 @@ export function Register({ setRegister, setLogin }) {
                     <div className="">
                         <label htmlFor="profile_image" className="dark:text-white">Upload Profile Picture</label>
                         <input
-                            required
                             onChange={(e) => setProfile_image(e.target.files[0])}
                             name="profile_image"
                             id="profile_image"
